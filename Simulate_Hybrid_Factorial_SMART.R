@@ -62,6 +62,7 @@ residuals_Y <- rnorm(n,0,true_params$sigma)
 Y <- round(EY + residuals_Y,1)
 
 sim_data <- data.frame(
+  ID = 1:n,
   is_female = is_female,
   baseline_bmi_centered = baseline_bmi_centered,
   app = Z11,
