@@ -1,4 +1,6 @@
+rm(list = ls())
 set.seed(60611)
+library(dplyr)
 
 # Code to simulate hybrid factorial-MRT following example 
 # in Figure 2 of Nahum‑Shani et al., (2023, Behavior Research Methods)
@@ -25,24 +27,24 @@ R <- rbinom(n,1,p_respond)
 true_distal_params <- data.frame(
   sigma	= 2.5,	# error SD; variable is kg lost
   theta_0_0 =  1.5 ,	# intercept
-  theta_0_1 =  0,	# female
-  theta_0_2 = -.1,	# baseline BMI
-  theta_1	= .3,	# coaching main effect
-  theta_2	= .2,	# meal replacement main effect
-  theta_3	= 0,	# coaching X meal replacement
+  theta_0_female =  0,	# female
+  theta_0_bmi = -.1,	# baseline BMI
+  theta_coaching	= .3,	# coaching main effect
+  theta_meal	= .2,	# meal replacement main effect
+  theta_coaching_meal	= 0,	# coaching X meal replacement
   eta	= 1.5)	    # noncausal effect of being a responder 
 # The above are the true parameters of conditional data-generating model; 
-# theta_1 through theta_3 are also the same for the 
+# theta_coaching through theta_coaching_meal are also the same for the 
 # marginal model assuming identity link function;
 
 # True parameters
 
 EY_distal <- true_distal_params$theta_0_0 +                 # intercept
-  true_distal_params$theta_0_1 * is_female + 
-  true_distal_params$theta_0_2 * baseline_bmi_centered + 
-  true_distal_params$theta_1 * Z11 +               # main effect of coaching
-  true_distal_params$theta_2 * Z12 +                   # main effect of meal replacement
-  true_distal_params$theta_3 * Z11 * Z12 +              # interaction of coaching and meal replacement
+  true_distal_params$theta_0_female * is_female + 
+  true_distal_params$theta_0_bmi * baseline_bmi_centered + 
+  true_distal_params$theta_coaching * Z11 +               # main effect of coaching
+  true_distal_params$theta_meal * Z12 +                   # main effect of meal replacement
+  true_distal_params$theta_coaching_meal * Z11 * Z12 +              # interaction of coaching and meal replacement
   true_distal_params$eta  * R
 # expected kg lost;
 
@@ -58,17 +60,79 @@ sim_person_level_data <- data.frame(
   R = R,
   final_kg_lost = distal_Y)
 
-person_level_fit <- lm(formula = final_kg_lost ~ is_female + 
-                         baseline_bmi_centered + 
-                         coaching * meal,
-                       data=sim_person_level_data)
-print(summary(person_level_fit))
-
-
+distal_outcome_model <- lm(formula = final_kg_lost ~ is_female + 
+                             baseline_bmi_centered + 
+                             coaching * meal,
+                           data=sim_person_level_data)
+print(summary(distal_outcome_model))
 
 write.csv(sim_person_level_data,
           "Simulated_Data_Hybrid_Factorial_MRT_person_level.csv", 
           row.names = FALSE)
 
 # Generate occasion-level outcomes
+
+# Simulate the long dataset used in the proximal analysis,
+# i.e., generate occasion-level outcomes 
+nobs <- 84;
+true_proximal_params <- data.frame(beta_0_0=log(.6),
+                                   beta_0_female=.01,
+                                   beta_0_bmi=0,
+                                   beta_coaching=.02,
+                                   beta_meal=.02,
+                                   beta_coaching_meal=.01,
+                                   gamma_A=.01,
+                                   gamma_A_coaching=.01,
+                                   gamma_A_meal=0,
+                                   gamma_A_coaching_meal=0,
+                                   eta_R=.02,
+                                   eta_backwards=.04);
+random_effect_sigma <- .1;
+A <- matrix(sample(c(+1,-1),
+                   prob=c(.5,.5),
+                   replace=TRUE,
+                   size=n*nobs),
+            n,nobs);
+sim_data_for_generating_proximal <- reshape2::melt(data=cbind(sim_person_level_data,A),  
+                                                   id=colnames(sim_person_level_data),
+                                                   variable.name="day",
+                                                   value.name="A");
+sim_data_for_generating_proximal$day <- as.integer(sim_data_for_generating_proximal$day);
+linear_predictor_Y_prox <- as.numeric( true_proximal_params$beta_0_0 +
+                                         true_proximal_params$beta_0_female * sim_data_for_generating_proximal$is_female +
+                                         true_proximal_params$beta_0_bmi * sim_data_for_generating_proximal$baseline_bmi_centered +
+                                         true_proximal_params$beta_coaching * sim_data_for_generating_proximal$coaching +
+                                         true_proximal_params$beta_meal * sim_data_for_generating_proximal$meal +
+                                         true_proximal_params$beta_coaching_meal * sim_data_for_generating_proximal$coaching * sim_data_for_generating_proximal$meal +
+                                         true_proximal_params$gamma_A * sim_data_for_generating_proximal$A +
+                                         true_proximal_params$gamma_A_coaching * sim_data_for_generating_proximal$A* sim_data_for_generating_proximal$coaching +
+                                         true_proximal_params$gamma_A_meal * sim_data_for_generating_proximal$A* sim_data_for_generating_proximal$meal +
+                                         true_proximal_params$gamma_A_coaching_meal * sim_data_for_generating_proximal$A * sim_data_for_generating_proximal$coaching * sim_data_for_generating_proximal$meal +
+                                         true_proximal_params$eta_R * sim_data_for_generating_proximal$R +
+                                         true_proximal_params$eta_backwards * scale(sim_data_for_generating_proximal$final_kg_lost));
+
+
+prob_Y_prox <- exp(linear_predictor_Y_prox);
+stopifnot(min(prob_Y_prox)>= 0);
+stopifnot(max(prob_Y_prox)<= 1);
+
+sim_data_for_generating_proximal$proximal_outcome <- rbinom(n=length(prob_Y_prox),
+                                                            size=1,
+                                                            prob=prob_Y_prox); 
+
+print(round(cor(sim_data_for_generating_proximal),2));
+
+sim_occasion_level_data <- sim_data_for_generating_proximal %>% arrange(ID, day) %>%
+  select(ID, day, is_female, baseline_bmi_centered, 
+         coaching, meal, A, proximal_outcome);
+
+print(head(sim_occasion_level_data))
+
+
+proximal_outcome_model <- glm(formula = proximal_outcome ~ is_female + 
+                                baseline_bmi_centered + 
+                                A * coaching * meal,
+                              family=binomial(link=log),
+                              data=sim_occasion_level_data)
+print(summary(proximal_outcome_model))
 
