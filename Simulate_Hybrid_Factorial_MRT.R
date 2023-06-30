@@ -9,7 +9,7 @@ library(dplyr)
 
 # Distal outcome: weight loss , kg, month 6
 # Proximal outcome: daily intake monitoring
-n = 400
+n <- 400
 
 # Generate random data
 is_female <- sample(c(-1,1),n,replace=TRUE,prob=c(.3,.7))
@@ -21,18 +21,14 @@ Z12 <- sample(c(-1,+1),size=n,replace=TRUE)
 # represents meal replacement, +1 for yes, -1 for no
 p_respond <- .5 + .1*Z11 + .1*Z12
 
-R <- rbinom(n,1,p_respond)
-# 0 for nonresponders, 1 for responders,
-
 true_distal_params <- data.frame(
   sigma	= 2.5,	# error SD; variable is kg lost
-  theta_0_0 =  1.5 ,	# intercept
+  theta_0_0 =  2.5 ,	# intercept
   theta_0_female =  0,	# female
   theta_0_bmi = -.1,	# baseline BMI
   theta_coaching	= .3,	# coaching main effect
   theta_meal	= .2,	# meal replacement main effect
-  theta_coaching_meal	= 0,	# coaching X meal replacement
-  eta	= 1.5)	    # noncausal effect of being a responder 
+  theta_coaching_meal	= 0)	# coaching X meal replacement
 # The above are the true parameters of conditional data-generating model; 
 # theta_coaching through theta_coaching_meal are also the same for the 
 # marginal model assuming identity link function;
@@ -44,8 +40,7 @@ EY_distal <- true_distal_params$theta_0_0 +                 # intercept
   true_distal_params$theta_0_bmi * baseline_bmi_centered + 
   true_distal_params$theta_coaching * Z11 +               # main effect of coaching
   true_distal_params$theta_meal * Z12 +                   # main effect of meal replacement
-  true_distal_params$theta_coaching_meal * Z11 * Z12 +              # interaction of coaching and meal replacement
-  true_distal_params$eta  * R
+  true_distal_params$theta_coaching_meal * Z11 * Z12               # interaction of coaching and meal replacement
 # expected kg lost;
 
 residuals_distal_Y <- rnorm(n,0,true_distal_params$sigma)
@@ -57,8 +52,10 @@ sim_person_level_data <- data.frame(
   baseline_bmi_centered = baseline_bmi_centered,
   coaching = Z11,
   meal = Z12,
-  R = R,
   final_kg_lost = distal_Y)
+
+print(head(sim_person_level_data))
+print(summary(sim_person_level_data))
 
 distal_outcome_model <- lm(formula = final_kg_lost ~ is_female + 
                              baseline_bmi_centered + 
@@ -85,7 +82,6 @@ true_proximal_params <- data.frame(beta_0_0=log(.6),
                                    gamma_A_coaching=.01,
                                    gamma_A_meal=0,
                                    gamma_A_coaching_meal=0,
-                                   eta_R=.02,
                                    eta_backwards=.04);
 random_effect_sigma <- .1;
 A <- matrix(sample(c(+1,-1),
@@ -108,9 +104,13 @@ linear_predictor_Y_prox <- as.numeric( true_proximal_params$beta_0_0 +
                                          true_proximal_params$gamma_A_coaching * sim_data_for_generating_proximal$A* sim_data_for_generating_proximal$coaching +
                                          true_proximal_params$gamma_A_meal * sim_data_for_generating_proximal$A* sim_data_for_generating_proximal$meal +
                                          true_proximal_params$gamma_A_coaching_meal * sim_data_for_generating_proximal$A * sim_data_for_generating_proximal$coaching * sim_data_for_generating_proximal$meal +
-                                         true_proximal_params$eta_R * sim_data_for_generating_proximal$R +
                                          true_proximal_params$eta_backwards * scale(sim_data_for_generating_proximal$final_kg_lost));
-
+               # Note: eta_backwards is a correlational "effect" of the distal
+               # on the proximal outcomes.  Of course the real causation would be
+               # in the other direction, and would probably involve a tiny 
+               # contribution from each proximal time point, but the important
+               # thing is that, for realism, the proximal outcome should have
+               # something to do with the distal.
 
 prob_Y_prox <- exp(linear_predictor_Y_prox);
 stopifnot(min(prob_Y_prox)>= 0);
@@ -127,13 +127,13 @@ sim_occasion_level_data <- sim_data_for_generating_proximal %>% arrange(ID, day)
          coaching, meal, A, proximal_outcome);
 
 print(head(sim_occasion_level_data))
-
+print(summary(sim_occasion_level_data))
 
 proximal_outcome_model <- glm(formula = proximal_outcome ~ is_female + 
                                 baseline_bmi_centered + 
                                 A * coaching * meal,
                               family=binomial(link=log),
-                              data=sim_occasion_level_data)
+                              data=sim_occasion_level_data) 
 print(summary(proximal_outcome_model))
 
 
