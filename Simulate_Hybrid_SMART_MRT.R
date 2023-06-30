@@ -67,7 +67,7 @@ distal_outcome_model <- lm(formula = final_kg_lost ~ is_female +
 print(summary(distal_outcome_model))
 
 write.csv(sim_person_level_data,
-          "Simulated_Data_Hybrid_Factorial_MRT_person_level.csv", 
+          "Simulated_Data_Hybrid_SMART_MRT_person_level.csv", 
           row.names = FALSE)
 
 # Generate occasion-level outcomes
@@ -139,5 +139,5 @@ naive_proximal_outcome_model <- glm(formula = proximal_outcome ~ is_female +
 print(summary(naive_proximal_outcome_model))
 
 write.csv(sim_occasion_level_data,
-          "Simulated_Data_Hybrid_Factorial_MRT_occasion_level.csv", 
+          "Simulated_Data_Hybrid_SMART_MRT_occasion_level.csv", 
           row.names = FALSE)
