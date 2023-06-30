@@ -6,6 +6,11 @@ print(head(person_level))
 print(summary(person_level))
 
 
+distal_outcome_model <- lm(formula = final_kg_lost ~ is_female + 
+                             baseline_bmi_centered + 
+                             coaching * meal,
+                           data=person_level)
+print(summary(distal_outcome_model))
 
 
 
@@ -14,4 +19,9 @@ occasion_level <- read.csv("Simulated_Data_Hybrid_SMART_MRT_occasion_level.csv")
 print(head(occasion_level))
 print(summary(occasion_level))
 
-
+naive_proximal_outcome_model <- glm(formula = proximal_outcome ~ is_female + 
+                                      baseline_bmi_centered + 
+                                      A * coaching * meal,
+                                    family=binomial(link=log),
+                                    data=occasion_level)
+print(summary(naive_proximal_outcome_model))
