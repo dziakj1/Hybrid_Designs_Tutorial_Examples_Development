@@ -1,0 +1,173 @@
+                                         The SAS System          17:05 Monday, July 24, 2023   1
+
+                                      The MEANS Procedure
+
+  Variable                   N            Mean         Std Dev         Minimum         Maximum
+  ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+  ID                       400     200.5000000     115.6143013       1.0000000     400.0000000
+  is_female                400       0.3950000       0.9198316      -1.0000000       1.0000000
+  baseline_bmi_centered    400      -0.0025000       3.1826903      -5.3000000       5.7000000
+  coaching                 400      -0.0250000       1.0009394      -1.0000000       1.0000000
+  meal                     400       0.0150000       1.0011397      -1.0000000       1.0000000
+  final_kg_lost            400       2.5530000       2.5622752      -4.6000000      12.7000000
+  ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                                         The SAS System          17:05 Monday, July 24, 2023   2
+
+                                      The GENMOD Procedure
+
+                                       Model Information
+
+                            Data Set              WORK.PERSON_LEVEL
+                            Distribution                     Normal
+                            Link Function                  Identity
+                            Dependent Variable        final_kg_lost
+
+
+                            Number of Observations Read         400
+                            Number of Observations Used         400
+
+
+                             Criteria For Assessing Goodness Of Fit
+ 
+                Criterion                     DF           Value        Value/DF
+
+                Deviance                     394       2400.2200          6.0919
+                Scaled Deviance              394        400.0000          1.0152
+                Pearson Chi-Square           394       2400.2200          6.0919
+                Scaled Pearson X2            394        400.0000          1.0152
+                Log Likelihood                         -925.9456                
+                Full Log Likelihood                    -925.9456                
+                AIC (smaller is better)                1865.8913                
+                AICC (smaller is better)               1866.1770                
+                BIC (smaller is better)                1893.8315                
+
+
+          Algorithm converged.                                                       
+
+
+                      Analysis Of Maximum Likelihood Parameter Estimates
+ 
+                                       Standard   Wald 95% Confidence         Wald
+Parameter              DF   Estimate      Error          Limits         Chi-Square   Pr > ChiSq
+
+Intercept               1     2.5651     0.1334     2.3036     2.8266       369.67       <.0001
+is_female               1    -0.0289     0.1339    -0.2912     0.2335         0.05       0.8292
+baseline_bmi_centere    1    -0.1962     0.0386    -0.2719    -0.1204        25.77       <.0001
+coaching                1     0.2053     0.1228    -0.0353     0.4460         2.80       0.0945
+meal                    1     0.3308     0.1226     0.0905     0.5710         7.28       0.0070
+coaching*meal           1     0.0330     0.1227    -0.2075     0.2735         0.07       0.7880
+Scale                   1     2.4496     0.0866     2.2856     2.6254                          
+
+NOTE: The scale parameter was estimated by maximum likelihood.
+                                         The SAS System          17:05 Monday, July 24, 2023   3
+
+                                      The MEANS Procedure
+
+ Variable                     N            Mean         Std Dev         Minimum         Maximum
+ ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+ ID                       33600     200.5000000     115.4714113       1.0000000     400.0000000
+ day                      33600      42.5000000      24.2473538       1.0000000      84.0000000
+ is_female                33600       0.3950000       0.9186948      -1.0000000       1.0000000
+ baseline_bmi_centered    33600      -0.0025000       3.1787568      -5.3000000       5.7000000
+ coaching                 33600      -0.0250000       0.9997023      -1.0000000       1.0000000
+ meal                     33600       0.0150000       0.9999024      -1.0000000       1.0000000
+ A                        33600       0.0060119       0.9999968      -1.0000000       1.0000000
+ proximal_outcome         33600       0.6063988       0.4885554               0       1.0000000
+ ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                                         The SAS System          17:05 Monday, July 24, 2023   4
+
+                                      The GENMOD Procedure
+
+                                       Model Information
+
+                           Data Set              WORK.OCCASION_LEVEL
+                           Distribution                     Binomial
+                           Link Function                         Log
+                           Dependent Variable       proximal_outcome
+
+
+                            Number of Observations Read       33600
+                            Number of Observations Used       33600
+                            Number of Events                  20375
+                            Number of Trials                  33600
+
+
+                                    Class Level Information
+ 
+            Class      Levels    Values
+
+            ID            400    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
+                                 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37
+                                 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54
+                                 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71
+                                 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87   
+                                 ...                                               
+
+
+                                        Response Profile
+ 
+                                Ordered    proximal_        Total
+                                  Value    outcome      Frequency
+
+                                      1    1                20375
+                                      2    0                13225
+
+PROC GENMOD is modeling the probability that proximal_outcome='1'.
+
+
+                                     Parameter Information
+ 
+                              Parameter       Effect
+
+                              Prm1            Intercept           
+                              Prm2            is_female           
+                              Prm3            baseline_bmi_centere
+                              Prm4            A                   
+                              Prm5            coaching            
+                              Prm6            A*coaching          
+                              Prm7            meal                
+                              Prm8            A*meal              
+                              Prm9            coaching*meal       
+                              Prm10           A*coaching*meal     
+                                         The SAS System          17:05 Monday, July 24, 2023   5
+
+                                      The GENMOD Procedure
+
+          Algorithm converged.                                                       
+
+
+                                     GEE Model Information
+
+                        Correlation Structure               Independent
+                        Subject Effect                  ID (400 levels)
+                        Number of Clusters                          400
+                        Correlation Matrix Dimension                 84
+                        Maximum Cluster Size                         84
+                        Minimum Cluster Size                         84
+
+
+          Algorithm converged.                                                       
+
+
+                                       GEE Fit Criteria
+
+                                     QIC        44981.2551
+                                     QICu       44979.3355
+
+
+                              Analysis Of GEE Parameter Estimates
+                              Empirical Standard Error Estimates
+ 
+                                         Standard   95% Confidence
+           Parameter            Estimate    Error       Limits            Z Pr > |Z|
+
+           Intercept             -0.5062   0.0053  -0.5165  -0.4958  -96.24   <.0001
+           is_female              0.0138   0.0053   0.0035   0.0242    2.62   0.0087
+           baseline_bmi_centere  -0.0045   0.0015  -0.0074  -0.0016   -3.06   0.0022
+           A                      0.0071   0.0044  -0.0015   0.0157    1.61   0.1073
+           coaching               0.0214   0.0048   0.0120   0.0307    4.47   <.0001
+           A*coaching             0.0093   0.0044   0.0007   0.0179    2.11   0.0346
+           meal                   0.0252   0.0048   0.0159   0.0345    5.31   <.0001
+           A*meal                 0.0029   0.0044  -0.0057   0.0115    0.65   0.5131
+           coaching*meal          0.0072   0.0048  -0.0021   0.0166    1.52   0.1284
+           A*coaching*meal        0.0063   0.0044  -0.0023   0.0149    1.44   0.1501

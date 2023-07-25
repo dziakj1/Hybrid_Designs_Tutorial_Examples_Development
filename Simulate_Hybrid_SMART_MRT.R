@@ -15,14 +15,17 @@ n = 400
 is_female <- sample(c(-1,1),n,replace=TRUE,prob=c(.3,.7))
 baseline_bmi <- round(runif(n, min=31, max=42),1)
 baseline_bmi_centered <- round(baseline_bmi - mean(baseline_bmi), 2)
-Z11 <- sample(c(-1,+1),size=n,replace=TRUE)
+Z1 <- sample(c(-1,+1),size=n,replace=TRUE)
 # represents coaching, +1 for yes, -1 for no
-Z12 <- sample(c(-1,+1),size=n,replace=TRUE)
-# represents meal replacement, +1 for yes, -1 for no
-p_respond <- .5 + .1*Z11 + .1*Z12
+p_respond <- .5 + .1*Z1
 
 R <- rbinom(n,1,p_respond)
 # 0 for nonresponders, 1 for responders,
+
+Z2 <- rep(0,n)
+Z2[which(R==0)] <- sample(c(-1,+1),size=sum(R==0),replace=TRUE)
+# represents meal replacement, +1 for yes, -1 for no, NA for not assigned
+ 
 
 true_distal_params <- data.frame(
   sigma	= 2.5,	# error SD; variable is kg lost
@@ -42,9 +45,9 @@ true_distal_params <- data.frame(
 EY_distal <- true_distal_params$theta_0_0 +                 # intercept
   true_distal_params$theta_0_female * is_female + 
   true_distal_params$theta_0_bmi * baseline_bmi_centered + 
-  true_distal_params$theta_coaching * Z11 +               # main effect of coaching
-  true_distal_params$theta_meal * Z12 +                   # main effect of meal replacement
-  true_distal_params$theta_coaching_meal * Z11 * Z12 +              # interaction of coaching and meal replacement
+  true_distal_params$theta_coaching * Z1 +               # main effect of coaching
+  true_distal_params$theta_meal * Z2 +                   # main effect of meal replacement
+  true_distal_params$theta_coaching_meal * Z1 * Z2 +              # interaction of coaching and meal replacement
   true_distal_params$eta  * R
 # expected kg lost;
 
@@ -55,8 +58,8 @@ sim_person_level_data <- data.frame(
   ID = 1:n,
   is_female = is_female,
   baseline_bmi_centered = baseline_bmi_centered,
-  coaching = Z11,
-  meal = Z12,
+  coaching = Z1,
+  meal = Z2,
   R = R,
   final_kg_lost = distal_Y)
 
@@ -65,10 +68,6 @@ distal_outcome_model <- lm(formula = final_kg_lost ~ is_female +
                              coaching * meal,
                            data=sim_person_level_data)
 print(summary(distal_outcome_model))
-
-write.csv(sim_person_level_data,
-          "Simulated_Data_Hybrid_SMART_MRT_person_level.csv", 
-          row.names = FALSE)
 
 # Generate occasion-level outcomes
 
@@ -126,7 +125,7 @@ print(round(cor(sim_data_for_generating_proximal),2));
 
 sim_occasion_level_data <- sim_data_for_generating_proximal %>% arrange(ID, day) %>%
   select(ID, day, is_female, baseline_bmi_centered, 
-         coaching, meal, A, proximal_outcome)
+         coaching, R, meal, A, proximal_outcome)
 
 print(head(sim_occasion_level_data))
 
@@ -138,6 +137,15 @@ naive_proximal_outcome_model <- glm(formula = proximal_outcome ~ is_female +
                                     data=sim_occasion_level_data)
 print(summary(naive_proximal_outcome_model))
 
+
+sim_person_level_data$meal[which(sim_person_level_data$meal==0)] <- NA
+write.csv(sim_person_level_data,
+          "Simulated_Data_Hybrid_SMART_MRT_person_level.csv", 
+          na="",
+          row.names = FALSE)
+
+sim_occasion_level_data$meal[which(sim_occasion_level_data$meal==0)] <- NA
 write.csv(sim_occasion_level_data,
           "Simulated_Data_Hybrid_SMART_MRT_occasion_level.csv", 
+          na="",
           row.names = FALSE)

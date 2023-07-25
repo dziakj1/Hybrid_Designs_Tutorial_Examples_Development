@@ -1,0 +1,128 @@
+                                         The SAS System          17:05 Monday, July 24, 2023   1
+
+                                      The MEANS Procedure
+
+  Variable                   N            Mean         Std Dev         Minimum         Maximum
+  ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+  ID                       400     200.5000000     115.6143013       1.0000000     400.0000000
+  is_female                400       0.3850000       0.9240724      -1.0000000       1.0000000
+  baseline_bmi_centered    400     0.000750000       3.0572605      -5.5000000       5.5000000
+  app                      400       0.0300000       1.0008017      -1.0000000       1.0000000
+  coaching                 400      -0.0050000       1.0012398      -1.0000000       1.0000000
+  R                        400       0.4900000       0.5005260               0       1.0000000
+  meal                     204       0.1176471       0.9954984      -1.0000000       1.0000000
+  final_kg_lost            400       2.2917500       2.5235844      -5.2000000       9.7000000
+  ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                                         The SAS System          17:05 Monday, July 24, 2023   2
+
+                                       The FREQ Procedure
+
+                                                   Cumulative    Cumulative
+                     R    Frequency     Percent     Frequency      Percent
+                     ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                     0         204       34.23           204        34.23  
+                     1         392       65.77           596       100.00  
+
+
+                                                       Cumulative    Cumulative
+                 replicate    Frequency     Percent     Frequency      Percent
+                 ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                         1         400       67.11           400        67.11  
+                         2         196       32.89           596       100.00  
+
+
+                                                    Cumulative    Cumulative
+                   meal    Frequency     Percent     Frequency      Percent
+                   ƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒƒ
+                     -1         286       47.99           286        47.99  
+                      1         310       52.01           596       100.00  
+                                         The SAS System          17:05 Monday, July 24, 2023   3
+
+                                      The GENMOD Procedure
+
+                                       Model Information
+
+                           Data Set                 WORK.FOR_ANALYSIS
+                           Distribution                        Normal
+                           Link Function                     Identity
+                           Dependent Variable           final_kg_lost
+                           Scale Weight Variable     replicate_weight
+
+
+                            Number of Observations Read         596
+                            Number of Observations Used         596
+                            Sum of Weights                     1600
+
+
+                                    Class Level Information
+ 
+            Class      Levels    Values
+
+            ID            400    1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
+                                 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37
+                                 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54
+                                 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71
+                                 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87   
+                                 ...                                               
+
+
+                                     Parameter Information
+ 
+                              Parameter       Effect
+
+                              Prm1            Intercept           
+                              Prm2            is_female           
+                              Prm3            baseline_bmi_centere
+                              Prm4            app                 
+                              Prm5            coaching            
+                              Prm6            app*coaching        
+                              Prm7            meal                
+                              Prm8            app*meal            
+                              Prm9            coaching*meal       
+                              Prm10           app*coaching*meal   
+
+
+          Algorithm converged.                                                       
+
+
+                                     GEE Model Information
+
+                        Correlation Structure               Independent
+                        Subject Effect                  ID (400 levels)
+                        Number of Clusters                          400
+                        Correlation Matrix Dimension                  2
+                                         The SAS System          17:05 Monday, July 24, 2023   4
+
+                                      The GENMOD Procedure
+
+                                     GEE Model Information
+
+                        Maximum Cluster Size                          2
+                        Minimum Cluster Size                          1
+
+
+          Algorithm converged.                                                       
+
+
+                                       GEE Fit Criteria
+
+                                     QIC          608.6917
+                                     QICu         606.0000
+
+
+                              Analysis Of GEE Parameter Estimates
+                              Empirical Standard Error Estimates
+ 
+                                         Standard   95% Confidence
+           Parameter            Estimate    Error       Limits            Z Pr > |Z|
+
+           Intercept              2.2293   0.1130   2.0078   2.4508   19.73   <.0001
+           is_female              0.0925   0.1129  -0.1288   0.3138    0.82   0.4127
+           baseline_bmi_centere  -0.0686   0.0336  -0.1345  -0.0027   -2.04   0.0414
+           app                    0.1139   0.1075  -0.0968   0.3247    1.06   0.2893
+           coaching               0.7149   0.1074   0.5044   0.9253    6.66   <.0001
+           app*coaching           0.1082   0.1075  -0.1025   0.3189    1.01   0.3142
+           meal                   0.9270   0.0856   0.7593   1.0948   10.83   <.0001
+           app*meal              -0.0179   0.0857  -0.1858   0.1501   -0.21   0.8350
+           coaching*meal          0.2774   0.0852   0.1103   0.4445    3.25   0.0011
+           app*coaching*meal      0.1180   0.0855  -0.0496   0.2855    1.38   0.1675

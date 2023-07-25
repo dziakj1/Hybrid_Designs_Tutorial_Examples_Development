@@ -1,0 +1,257 @@
+1                                        The SAS System              17:05 Monday, July 24, 2023
+
+NOTE: Copyright (c) 2016 by SAS Institute Inc., Cary, NC, USA. 
+NOTE: SAS (r) Proprietary Software 9.4 (TS1M7) 
+      Licensed to UNIVERSITY OF ILLINOIS SYSTEM - T&R SFA, Site 70080107.
+NOTE: This session is executing on the X64_10PRO  platform.
+
+
+
+NOTE: Analytical products:
+      
+      SAS/STAT 15.2
+      SAS/ETS 15.2
+      SAS/OR 15.2
+      SAS/IML 15.2
+      SAS/QC 15.2
+
+NOTE: Additional host information:
+
+ X64_10PRO WIN 10.0.19041  Workstation
+
+NOTE: SAS initialization used:
+      real time           0.16 seconds
+      cpu time            0.07 seconds
+      
+1          PROC IMPORT OUT=person_level
+2                      DATAFILE= "C:\Users\dziak\OneDrive - University of Illinois
+2        ! Chicago\Documents\SimExamples\Simulated_Data_Hybrid_Factorial_MRT_person_level.csv"
+3                      DBMS=CSV REPLACE;
+4               GETNAMES=YES;
+5               DATAROW=2;
+6          RUN;
+
+7           /**********************************************************************
+8           *   PRODUCT:   SAS
+9           *   VERSION:   9.4
+10          *   CREATOR:   External File Interface
+11          *   DATE:      24JUL23
+12          *   DESC:      Generated SAS Datastep Code
+13          *   TEMPLATE SOURCE:  (None Specified.)
+14          ***********************************************************************/
+15             data WORK.PERSON_LEVEL    ;
+16             %let _EFIERR_ = 0; /* set the ERROR detection macro variable */
+17             infile 'C:\Users\dziak\OneDrive - University of Illinois
+17       ! Chicago\Documents\SimExamples\Simulated_Data_Hybrid_Factorial_MRT_person_level.csv'
+17       ! delimiter = ',' MISSOVER DSD lrecl=32767 firstobs=2 ;
+18                informat ID best32. ;
+19                informat is_female best32. ;
+20                informat baseline_bmi_centered best32. ;
+21                informat coaching best32. ;
+22                informat meal best32. ;
+23                informat final_kg_lost best32. ;
+24                format ID best12. ;
+25                format is_female best12. ;
+26                format baseline_bmi_centered best12. ;
+2                                        The SAS System              17:05 Monday, July 24, 2023
+
+27                format coaching best12. ;
+28                format meal best12. ;
+29                format final_kg_lost best12. ;
+30             input
+31                         ID
+32                         is_female
+33                         baseline_bmi_centered
+34                         coaching
+35                         meal
+36                         final_kg_lost
+37             ;
+38             if _ERROR_ then call symputx('_EFIERR_',1);  /* set ERROR detection macro
+38       ! variable */
+39             run;
+
+NOTE: The infile 'C:\Users\dziak\OneDrive - University of Illinois 
+      Chicago\Documents\SimExamples\Simulated_Data_Hybrid_Factorial_MRT_person_level.csv' is:
+      
+      Filename=C:\Users\dziak\OneDrive - University of Illinois 
+      Chicago\Documents\SimExamples\Simulated_Data_Hybrid_Factorial_MRT_person_level.csv,
+      RECFM=V,LRECL=32767,File Size (bytes)=8192,
+      Last Modified=14Jul2023:12:41:30,
+      Create Time=11Jul2023:15:28:13
+
+NOTE: 400 records were read from the infile 'C:\Users\dziak\OneDrive - University of Illinois 
+      Chicago\Documents\SimExamples\Simulated_Data_Hybrid_Factorial_MRT_person_level.csv'.
+      The minimum record length was 12.
+      The maximum record length was 22.
+NOTE: The data set WORK.PERSON_LEVEL has 400 observations and 6 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+400 rows created in WORK.PERSON_LEVEL from C:\Users\dziak\OneDrive - University of Illinois 
+Chicago\Documents\SimExamples\Simulated_Data_Hybrid_Factorial_MRT_person_level.csv.
+  
+  
+  
+NOTE: WORK.PERSON_LEVEL data set was successfully created.
+NOTE: The data set WORK.PERSON_LEVEL has 400 observations and 6 variables.
+NOTE: PROCEDURE IMPORT used (Total process time):
+      real time           0.04 seconds
+      cpu time            0.04 seconds
+      
+
+40         
+41         PROC MEANS DATA=person_level;
+42         RUN;
+
+NOTE: There were 400 observations read from the data set WORK.PERSON_LEVEL.
+NOTE: The PROCEDURE MEANS printed page 1.
+NOTE: PROCEDURE MEANS used (Total process time):
+3                                        The SAS System              17:05 Monday, July 24, 2023
+
+      real time           0.02 seconds
+      cpu time            0.01 seconds
+      
+
+43         
+44         PROC GENMOD DATA=person_level;
+45         	MODEL final_kg_lost = is_female baseline_bmi_centered coaching | meal;
+46         RUN;
+
+
+NOTE: Algorithm converged.
+NOTE: The scale parameter was estimated by maximum likelihood.
+NOTE: The PROCEDURE GENMOD printed page 2.
+NOTE: PROCEDURE GENMOD used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+46       !      QUIT;
+47         
+48         PROC IMPORT OUT=occasion_level
+49                     DATAFILE= "C:\Users\dziak\OneDrive - University of Illinois
+49       ! Chicago\Documents\SimExamples\Simulated_Data_Hybrid_Factorial_MRT_occasion_level.csv"
+50                     DBMS=CSV REPLACE;
+51              GETNAMES=YES;
+52              DATAROW=2;
+53         RUN;
+
+54          /**********************************************************************
+55          *   PRODUCT:   SAS
+56          *   VERSION:   9.4
+57          *   CREATOR:   External File Interface
+58          *   DATE:      24JUL23
+59          *   DESC:      Generated SAS Datastep Code
+60          *   TEMPLATE SOURCE:  (None Specified.)
+61          ***********************************************************************/
+62             data WORK.OCCASION_LEVEL    ;
+63             %let _EFIERR_ = 0; /* set the ERROR detection macro variable */
+64             infile 'C:\Users\dziak\OneDrive - University of Illinois
+64       ! Chicago\Documents\SimExamples\Simulated_Data_Hybrid_Factorial_MRT_occasion_level.csv'
+64       !  delimiter = ',' MISSOVER DSD lrecl=32767 firstobs=2 ;
+65                informat ID best32. ;
+66                informat day best32. ;
+67                informat is_female best32. ;
+68                informat baseline_bmi_centered best32. ;
+69                informat coaching best32. ;
+70                informat meal best32. ;
+71                informat A best32. ;
+72                informat proximal_outcome best32. ;
+73                format ID best12. ;
+74                format day best12. ;
+75                format is_female best12. ;
+76                format baseline_bmi_centered best12. ;
+4                                        The SAS System              17:05 Monday, July 24, 2023
+
+77                format coaching best12. ;
+78                format meal best12. ;
+79                format A best12. ;
+80                format proximal_outcome best12. ;
+81             input
+82                         ID
+83                         day
+84                         is_female
+85                         baseline_bmi_centered
+86                         coaching
+87                         meal
+88                         A
+89                         proximal_outcome
+90             ;
+91             if _ERROR_ then call symputx('_EFIERR_',1);  /* set ERROR detection macro
+91       ! variable */
+92             run;
+
+NOTE: The infile 'C:\Users\dziak\OneDrive - University of Illinois 
+      Chicago\Documents\SimExamples\Simulated_Data_Hybrid_Factorial_MRT_occasion_level.csv' is:
+      
+      Filename=C:\Users\dziak\OneDrive - University of Illinois 
+      Chicago\Documents\SimExamples\Simulated_Data_Hybrid_Factorial_MRT_occasion_level.csv,
+      RECFM=V,LRECL=32767,File Size (bytes)=796740,
+      Last Modified=14Jul2023:12:41:31,
+      Create Time=11Jul2023:15:28:13
+
+NOTE: 33600 records were read from the infile 'C:\Users\dziak\OneDrive - University of Illinois 
+      Chicago\Documents\SimExamples\Simulated_Data_Hybrid_Factorial_MRT_occasion_level.csv'.
+      The minimum record length was 16.
+      The maximum record length was 25.
+NOTE: The data set WORK.OCCASION_LEVEL has 33600 observations and 8 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+33600 rows created in WORK.OCCASION_LEVEL from C:\Users\dziak\OneDrive - University of Illinois 
+Chicago\Documents\SimExamples\Simulated_Data_Hybrid_Factorial_MRT_occasion_level.csv.
+  
+  
+  
+NOTE: WORK.OCCASION_LEVEL data set was successfully created.
+NOTE: The data set WORK.OCCASION_LEVEL has 33600 observations and 8 variables.
+NOTE: PROCEDURE IMPORT used (Total process time):
+      real time           0.03 seconds
+      cpu time            0.03 seconds
+      
+
+93         
+94         PROC MEANS DATA=occasion_level;
+95         RUN;
+
+5                                        The SAS System              17:05 Monday, July 24, 2023
+
+NOTE: There were 33600 observations read from the data set WORK.OCCASION_LEVEL.
+NOTE: The PROCEDURE MEANS printed page 3.
+NOTE: PROCEDURE MEANS used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.06 seconds
+      
+
+96         
+97         PROC GENMOD DATA=occasion_level DESCENDING;
+98         	CLASS ID;
+99         	MODEL proximal_outcome = is_female baseline_bmi_centered
+100                                     A | coaching | meal /
+101                                     DIST=BIN
+102                                     LINK=LOG;
+103        	REPEATED SUBJECT=ID;
+104        RUN;
+
+
+NOTE: Class levels for some variables were not printed due to excessive size.
+NOTE: PROC GENMOD is modeling the probability that proximal_outcome='1'.
+NOTE: Algorithm converged.
+NOTE: Algorithm converged.
+NOTE: The PROCEDURE GENMOD printed pages 4-5.
+NOTE: PROCEDURE GENMOD used (Total process time):
+      real time           0.14 seconds
+      cpu time            0.14 seconds
+      
+
+104      !      QUIT;
+
+NOTE: SAS Institute Inc., SAS Campus Drive, Cary, NC USA 27513-2414
+NOTE: The SAS System used:
+      real time           0.46 seconds
+      cpu time            0.42 seconds
+      

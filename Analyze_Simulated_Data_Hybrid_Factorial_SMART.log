@@ -1,0 +1,235 @@
+1                                        The SAS System              17:05 Monday, July 24, 2023
+
+NOTE: Copyright (c) 2016 by SAS Institute Inc., Cary, NC, USA. 
+NOTE: SAS (r) Proprietary Software 9.4 (TS1M7) 
+      Licensed to UNIVERSITY OF ILLINOIS SYSTEM - T&R SFA, Site 70080107.
+NOTE: This session is executing on the X64_10PRO  platform.
+
+
+
+NOTE: Analytical products:
+      
+      SAS/STAT 15.2
+      SAS/ETS 15.2
+      SAS/OR 15.2
+      SAS/IML 15.2
+      SAS/QC 15.2
+
+NOTE: Additional host information:
+
+ X64_10PRO WIN 10.0.19041  Workstation
+
+NOTE: SAS initialization used:
+      real time           0.17 seconds
+      cpu time            0.09 seconds
+      
+1          PROC IMPORT OUT=sim_data
+2                      DATAFILE= "C:\Users\dziak\OneDrive - University of Illinois
+2        ! Chicago\Documents\SimExamples\Simulated_Data_Hybrid_Factorial_SMART.csv"
+3                      DBMS=CSV REPLACE;
+4               GETNAMES=YES;
+5               DATAROW=2;
+6          RUN;
+
+7           /**********************************************************************
+8           *   PRODUCT:   SAS
+9           *   VERSION:   9.4
+10          *   CREATOR:   External File Interface
+11          *   DATE:      24JUL23
+12          *   DESC:      Generated SAS Datastep Code
+13          *   TEMPLATE SOURCE:  (None Specified.)
+14          ***********************************************************************/
+15             data WORK.SIM_DATA    ;
+16             %let _EFIERR_ = 0; /* set the ERROR detection macro variable */
+17             infile 'C:\Users\dziak\OneDrive - University of Illinois
+17       ! Chicago\Documents\SimExamples\Simulated_Data_Hybrid_Factorial_SMART.csv' delimiter =
+17       ! ',' MISSOVER DSD lrecl=32767 firstobs=2 ;
+18                informat ID best32. ;
+19                informat is_female best32. ;
+20                informat baseline_bmi_centered best32. ;
+21                informat app best32. ;
+22                informat coaching best32. ;
+23                informat R best32. ;
+24                informat meal best32. ;
+25                informat final_kg_lost best32. ;
+26                format ID best12. ;
+2                                        The SAS System              17:05 Monday, July 24, 2023
+
+27                format is_female best12. ;
+28                format baseline_bmi_centered best12. ;
+29                format app best12. ;
+30                format coaching best12. ;
+31                format R best12. ;
+32                format meal best12. ;
+33                format final_kg_lost best12. ;
+34             input
+35                         ID
+36                         is_female
+37                         baseline_bmi_centered
+38                         app
+39                         coaching
+40                         R
+41                         meal
+42                         final_kg_lost
+43             ;
+44             if _ERROR_ then call symputx('_EFIERR_',1);  /* set ERROR detection macro
+44       ! variable */
+45             run;
+
+NOTE: The infile 'C:\Users\dziak\OneDrive - University of Illinois 
+      Chicago\Documents\SimExamples\Simulated_Data_Hybrid_Factorial_SMART.csv' is:
+      
+      Filename=C:\Users\dziak\OneDrive - University of Illinois 
+      Chicago\Documents\SimExamples\Simulated_Data_Hybrid_Factorial_SMART.csv,
+      RECFM=V,LRECL=32767,File Size (bytes)=9685,
+      Last Modified=14Jul2023:12:41:25,
+      Create Time=11Jul2023:15:28:13
+
+NOTE: 400 records were read from the infile 'C:\Users\dziak\OneDrive - University of Illinois 
+      Chicago\Documents\SimExamples\Simulated_Data_Hybrid_Factorial_SMART.csv'.
+      The minimum record length was 16.
+      The maximum record length was 26.
+NOTE: The data set WORK.SIM_DATA has 400 observations and 8 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+400 rows created in WORK.SIM_DATA from C:\Users\dziak\OneDrive - University of Illinois 
+Chicago\Documents\SimExamples\Simulated_Data_Hybrid_Factorial_SMART.csv.
+  
+  
+  
+NOTE: WORK.SIM_DATA data set was successfully created.
+NOTE: The data set WORK.SIM_DATA has 400 observations and 8 variables.
+NOTE: PROCEDURE IMPORT used (Total process time):
+      real time           0.04 seconds
+      cpu time            0.04 seconds
+      
+
+46         
+3                                        The SAS System              17:05 Monday, July 24, 2023
+
+47         PROC MEANS DATA=sim_data; RUN;
+
+NOTE: There were 400 observations read from the data set WORK.SIM_DATA.
+NOTE: The PROCEDURE MEANS printed page 1.
+NOTE: PROCEDURE MEANS used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+48         
+49         DATA sim_data;
+50         	SET sim_data;
+51         	replicate_weight = 4*(R=0) + 2*(R=1);
+52         RUN;
+
+NOTE: There were 400 observations read from the data set WORK.SIM_DATA.
+NOTE: The data set WORK.SIM_DATA has 400 observations and 9 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+53         
+54         DATA positive_pseudodata;
+55         	SET sim_data;
+56         	WHERE R=1;
+57         	meal = 1;
+58         	replicate = 1;
+59         	/* We keep the same subject ID to show that we don't really have all those
+60         	 new participants.  So we have to distinguish the new observations somehow,
+61         	 and so we treat them as new waves of data on the same person.   */
+62         RUN;
+
+NOTE: There were 196 observations read from the data set WORK.SIM_DATA.
+      WHERE R=1;
+NOTE: The data set WORK.POSITIVE_PSEUDODATA has 196 observations and 10 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.00 seconds
+      
+
+63         DATA negative_pseudodata;
+64         	SET sim_data;
+65         	WHERE R=1;
+66         	meal = -1;
+67         	replicate = 2;
+68         RUN;
+
+NOTE: There were 196 observations read from the data set WORK.SIM_DATA.
+      WHERE R=1;
+NOTE: The data set WORK.NEGATIVE_PSEUDODATA has 196 observations and 10 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+4                                        The SAS System              17:05 Monday, July 24, 2023
+
+      cpu time            0.01 seconds
+      
+
+69         DATA not_replicated;
+70         	SET sim_data;
+71         	WHERE R=0;
+72         	replicate = 1;
+73         RUN;
+
+NOTE: There were 204 observations read from the data set WORK.SIM_DATA.
+      WHERE R=0;
+NOTE: The data set WORK.NOT_REPLICATED has 204 observations and 10 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+74         
+75         DATA for_analysis;
+76         	SET not_replicated positive_pseudodata negative_pseudodata;
+77         RUN;
+
+NOTE: There were 204 observations read from the data set WORK.NOT_REPLICATED.
+NOTE: There were 196 observations read from the data set WORK.POSITIVE_PSEUDODATA.
+NOTE: There were 196 observations read from the data set WORK.NEGATIVE_PSEUDODATA.
+NOTE: The data set WORK.FOR_ANALYSIS has 596 observations and 10 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.01 seconds
+      
+
+78         
+79         PROC FREQ DATA=for_analysis;
+80         	TABLES R replicate meal;
+81         RUN;
+
+NOTE: There were 596 observations read from the data set WORK.FOR_ANALYSIS.
+NOTE: The PROCEDURE FREQ printed page 2.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.01 seconds
+      cpu time            0.00 seconds
+      
+
+82         
+83         
+84         PROC GENMOD DATA=for_analysis;
+85         	CLASS ID;
+86         	MODEL final_kg_lost = is_female baseline_bmi_centered app | coaching | meal;
+87         	REPEATED SUBJECT=ID;
+88         	WEIGHT replicate_weight;
+89         RUN;
+
+NOTE: Class levels for some variables were not printed due to excessive size.
+5                                        The SAS System              17:05 Monday, July 24, 2023
+
+NOTE: Algorithm converged.
+NOTE: Algorithm converged.
+NOTE: The PROCEDURE GENMOD printed pages 3-4.
+NOTE: PROCEDURE GENMOD used (Total process time):
+      real time           0.02 seconds
+      cpu time            0.01 seconds
+      
+
+NOTE: SAS Institute Inc., SAS Campus Drive, Cary, NC USA 27513-2414
+NOTE: The SAS System used:
+      real time           0.33 seconds
+      cpu time            0.21 seconds
+      

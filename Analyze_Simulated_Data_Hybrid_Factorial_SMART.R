@@ -34,17 +34,12 @@ print(head(data_for_analysis))
 model_formula <- final_kg_lost ~ is_female + 
   baseline_bmi_centered + 
   app * coaching * meal
+ 
 
-# Fit naive model for comparison
-unweighted_model <- lm(formula = model_formula,
-                           data=sim_data)
-print(summary(unweighted_model))
-
-# Fit analysis model
-gee_formula_1 <- Y1 ~ A1 + A2 + A1:A2; 
+# Fit analysis model 
 weighted_and_replicated_model <- geeglm(formula = model_formula,
                      id=ID, 
                      weights = replicate_weight, 
                      data=data_for_analysis,
-                     corstr = "independence"); 
+                     corstr = "independence") 
 print(summary(weighted_and_replicated_model))

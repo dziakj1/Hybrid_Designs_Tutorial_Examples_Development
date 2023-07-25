@@ -2,6 +2,7 @@ library(geepack)
 
 # Read the simulated person-level data for distal outcome analysis
 person_level <- read.csv("Simulated_Data_Hybrid_Factorial_MRT_person_level.csv")
+print(dim(person_level))
 print(head(person_level))
 print(summary(person_level))
 # Fit analysis model for distal outcome
@@ -13,6 +14,7 @@ print(summary(distal_outcome_model))
 
 # Read the simulated occasion-level data for proximal outcome analysis
 occasion_level <- read.csv("Simulated_Data_Hybrid_Factorial_MRT_occasion_level.csv")
+print(dim(occasion_level))
 print(head(occasion_level))
 print(summary(occasion_level))
 # Fit analysis model for proximal outcome

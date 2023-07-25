@@ -139,4 +139,5 @@ print(summary(proximal_outcome_model))
 
 write.csv(sim_occasion_level_data,
           "Simulated_Data_Hybrid_Factorial_MRT_occasion_level.csv", 
+          na="",
           row.names = FALSE) 

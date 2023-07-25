@@ -84,5 +84,4 @@ print(summary(sim_data))
 
 write.csv(sim_data,
             "Simulated_Data_Hybrid_Factorial_SMART.csv", 
-          na="",
-          row.names = FALSE)
+            row.names = FALSE)
