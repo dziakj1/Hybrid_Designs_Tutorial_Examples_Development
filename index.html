@@ -365,10 +365,10 @@ Information</a></li>
 </ul>
 </div>
 
-<div id="on-this-page-we-provide-example-datasets-analysis-code-in-sas-and-r-and-outputs-for-the-three-kinds-of-hybrid-experimental-designs-considered-in-this-recent-paper" class="section level3">
-<h3>On this page we provide example datasets, analysis code in SAS and
+<div id="on-this-page-we-provide-example-datasets-analysis-code-in-sas-and-r-and-outputs-for-the-three-kinds-of-hybrid-experimental-designs-considered-in-this-recent-paper" class="section level4">
+<h4>On this page we provide example datasets, analysis code in SAS and
 R, and outputs, for the three kinds of hybrid experimental designs
-considered in this recent paper:</h3>
+considered in this recent paper:</h4>
 <blockquote>
 <p>Nahum-Shani, I., Dziak, J. J., Venera, H., Spring, B., &amp; Dempsey
 W. (2023). <a href="https://link.springer.com/article/10.3758/s13428-023-02119-z">Design
@@ -377,11 +377,11 @@ The Hybrid Experimental Design</a>. <em>Behavior Research Methods</em>,
 <a href="https://doi.org/10.3758/s13428-023-02119-z">doi:10.3758/s13428-023-02119-z</a>.</p>
 </blockquote>
 </div>
-<div id="each-example-is-based-on-a-hypothetical-study-to-answer-questions-which-inform-the-design-of-weight-loss-interventions-integrating-multiple-components.-more-details-on-the-motivation-and-interpretation-for-each-example-is-given-in-nahum-shani-et-al-2023." class="section level3">
-<h3>Each example is based on a hypothetical study to answer questions
+<div id="each-example-is-based-on-a-hypothetical-study-to-answer-questions-which-inform-the-design-of-weight-loss-interventions-integrating-multiple-components.-more-details-on-the-motivation-and-interpretation-for-each-example-is-given-in-nahum-shani-et-al-2023." class="section level4">
+<h4>Each example is based on a hypothetical study to answer questions
 which inform the design of weight loss interventions integrating
 multiple components. More details on the motivation and interpretation
-for each example is given in Nahum-Shani et al (2023).</h3>
+for each example is given in Nahum-Shani et al (2023).</h4>
 </div>
 <div id="hybrid-factorial-smart" class="section level1">
 <h1>Hybrid Factorial-SMART</h1>
@@ -401,16 +401,21 @@ the initial randomization stage. The second question is addressed by a
 second-stage random assignment of nonresponders to `stay the course’ or
 to additionally add meal replacement. The resulting design is a hybrid
 factorial-SMART.</p>
-<div id="simulated-data" class="section level2">
-<h2><a href="Simulated_Data_Hybrid_Factorial_SMART.csv">Simulated
-Data</a></h2>
+<div id="downloads" class="section level3">
+<h3>Downloads</h3>
+<ul>
+<li><p><a href="Simulated_Data_Hybrid_Factorial_SMART.csv">Simulated
+Data</a></p></li>
+<li><p><a href="Analyze_Simulated_Data_Hybrid_Factorial_SMART.sas">Analysis Code
+for SAS</a></p></li>
+<li><p><a href="factorial-smart-results.pdf">Sample Output from
+SAS</a></p></li>
+<li><p><a href="Analyze_Simulated_Data_Hybrid_Factorial_SMART.R">Analysis Code for
+R</a></p></li>
+</ul>
 </div>
-<div id="analysis-code-for-r" class="section level2">
-<h2><a href="Analyze_Simulated_Data_Hybrid_Factorial_SMART.R">Analysis
-Code for R</a></h2>
-</div>
-<div id="sample-output-from-r" class="section level2">
-<h2>Sample Output from R</h2>
+<div id="sample-output-from-r" class="section level3">
+<h3>Sample Output from R</h3>
 <pre><code>Call:
 geeglm(formula = model_formula, data = data_for_analysis, weights = replicate_weight, 
     id = ID, corstr = &quot;independence&quot;)
@@ -437,34 +442,29 @@ Estimated Scale Parameters:
 (Intercept)    4.902  0.3208
 Number of clusters:   400  Maximum cluster size: 2 </code></pre>
 </div>
-<div id="analysis-code-for-sas" class="section level2">
-<h2><a href="Analyze_Simulated_Data_Hybrid_Factorial_SMART.sas">Analysis
-Code for SAS</a></h2>
-</div>
-<div id="sample-output-from-sas" class="section level2">
-<h2><a href="factorial-smart-results.pdf">Sample Output from
-SAS</a></h2>
-</div>
 </div>
 <div id="hybrid-factorial-mrt" class="section level1">
 <h1>Hybrid Factorial-MRT</h1>
 <p>In the example hybrid factorial-MRT,</p>
-<div id="simulated-occasion-level-data" class="section level2">
-<h2><a href="Simulated_Data_Hybrid_Factorial_MRT_occasion_level.csv">Simulated
-Occasion-Level Data</a></h2>
+<div id="downloads-1" class="section level3">
+<h3>Downloads</h3>
+<ul>
+<li><p><a href="Simulated_Data_Hybrid_Factorial_MRT_occasion_level.csv">Simulated
+Occasion-Level Data</a></p></li>
+<li><p><a href="Simulated_Data_Hybrid_Factorial_MRT_person_level.csv">Simulated
+Person-Level Data</a></p></li>
+<li><p><a href="Analyze_Simulated_Data_Hybrid_Factorial_MRT.R">Analysis
+Code for R</a></p></li>
+<li><p><a href="Analyze_Simulated_Data_Hybrid_Factorial_MRT.sas">Analysis Code for
+SAS</a></p></li>
+<li><p><a href="factorial-mrt-results.pdf">Sample Output from
+SAS</a></p></li>
+</ul>
 </div>
-<div id="simulated-person-level-data" class="section level2">
-<h2><a href="Simulated_Data_Hybrid_Factorial_MRT_person_level.csv">Simulated
-Person-Level Data</a></h2>
-</div>
-<div id="analysis-code-for-r-1" class="section level2">
-<h2><a href="Analyze_Simulated_Data_Hybrid_Factorial_MRT.R">Analysis
-Code for R</a></h2>
-</div>
-<div id="sample-output-from-r-1" class="section level2">
-<h2>Sample Output from R</h2>
-<div id="distal" class="section level3">
-<h3>Distal:</h3>
+<div id="sample-output-from-r-1" class="section level3">
+<h3>Sample Output from R</h3>
+<div id="distal" class="section level4">
+<h4>Distal:</h4>
 <pre><code>
 Call:
 lm(formula = final_kg_lost ~ is_female + baseline_bmi_centered + 
@@ -489,8 +489,8 @@ Residual standard error: 2.47 on 394 degrees of freedom
 Multiple R-squared:  0.0837,    Adjusted R-squared:  0.0721 
 F-statistic:  7.2 on 5 and 394 DF,  p-value: 1.82e-06</code></pre>
 </div>
-<div id="proximal" class="section level3">
-<h3>Proximal:</h3>
+<div id="proximal" class="section level4">
+<h4>Proximal:</h4>
 <pre><code>Call:
 geeglm(formula = proximal_outcome ~ is_female + baseline_bmi_centered + 
     A * coaching * meal, family = binomial(link = log), data = occasion_level, 
@@ -519,32 +519,28 @@ Estimated Scale Parameters:
 Number of clusters:   400  Maximum cluster size: 84 </code></pre>
 </div>
 </div>
-<div id="analysis-code-for-sas-1" class="section level2">
-<h2><a href="Analyze_Simulated_Data_Hybrid_Factorial_MRT.sas">Analysis
-Code for SAS</a></h2>
-</div>
-<div id="sample-output-from-sas-1" class="section level2">
-<h2><a href="factorial-mrt-results.pdf">Sample Output from SAS</a></h2>
-</div>
 </div>
 <div id="hybrid-smart-mrt" class="section level1">
 <h1>Hybrid SMART-MRT</h1>
-<div id="simulated-occasion-level-data-1" class="section level2">
-<h2><a href="Simulated_Data_Hybrid_SMART_MRT_occasion_level.csv">Simulated
-Occasion-Level Data</a></h2>
+<div id="downloads-2" class="section level3">
+<h3>Downloads</h3>
+<ul>
+<li><p><a href="Simulated_Data_Hybrid_SMART_MRT_occasion_level.csv">Simulated
+Occasion-Level Data</a></p></li>
+<li><p><a href="Simulated_Data_Hybrid_SMART_MRT_person_level.csv">Simulated
+Person-Level Data</a></p></li>
+<li><p><a href="Analyze_Simulated_Data_Hybrid_SMART_MRT.sas">Analysis
+Code for SAS</a></p></li>
+<li><p><a href="smart-mrt-results.pdf">Sample Output from
+SAS</a></p></li>
+<li><p><a href="Analyze_Simulated_Data_Hybrid_SMART_MRT.R">Analysis Code
+for R</a></p></li>
+</ul>
 </div>
-<div id="simulated-person-level-data-1" class="section level2">
-<h2><a href="Simulated_Data_Hybrid_SMART_MRT_person_level.csv">Simulated
-Person-Level Data</a></h2>
-</div>
-<div id="analysis-code-for-r-2" class="section level2">
-<h2><a href="Analyze_Simulated_Data_Hybrid_SMART_MRT.R">Analysis Code
-for R</a></h2>
-</div>
-<div id="sample-output-from-r-2" class="section level2">
-<h2>Sample Output from R</h2>
-<div id="distal-1" class="section level3">
-<h3>Distal</h3>
+<div id="sample-output-from-r-2" class="section level3">
+<h3>Sample Output from R</h3>
+<div id="distal-1" class="section level4">
+<h4>Distal</h4>
 <pre><code>Call:
 geeglm(formula = final_kg_lost ~ is_female + baseline_bmi_centered + 
     coaching * meal, family = gaussian, data = person_level_data_for_analysis, 
@@ -568,8 +564,8 @@ Estimated Scale Parameters:
 (Intercept)     6.38   0.469
 Number of clusters:   400  Maximum cluster size: 2 </code></pre>
 </div>
-<div id="proximal-1" class="section level3">
-<h3>Proximal</h3>
+<div id="proximal-1" class="section level4">
+<h4>Proximal</h4>
 <pre><code>Call:
 geeglm(formula = proximal_outcome ~ is_female + baseline_bmi_centered + 
     A * coaching * meal, family = binomial(link = log), data = occasion_level_data_for_analysis, 
@@ -598,32 +594,25 @@ Estimated Scale Parameters:
 Number of clusters:   400  Maximum cluster size: 168 </code></pre>
 </div>
 </div>
-<div id="analysis-code-for-sas-2" class="section level2">
-<h2><a href="Analyze_Simulated_Data_Hybrid_SMART_MRT.sas">Analysis Code
-for SAS</a></h2>
-</div>
-<div id="sample-output-from-sas-2" class="section level2">
-<h2><a href="smart-mrt-results.pdf">Sample Output from SAS</a></h2>
-</div>
 </div>
 <div id="further-information" class="section level1">
 <h1>Further Information</h1>
-<div id="what-resources-does-this-page-provide" class="section level2">
-<h2>What resources does this page provide?</h2>
+<div id="what-resources-does-this-page-provide" class="section level3">
+<h3>What resources does this page provide?</h3>
 <p>This page provides links to simulated datasets and sample analysis
 code and output for three novel kinds of experimental designs for use in
 informing the development of multimodal adaptive interventions.</p>
 </div>
-<div id="how-can-an-intervention-scientist-use-the-resources-on-this-page" class="section level2">
-<h2>How can an intervention scientist use the resources on this
-page?</h2>
+<div id="how-can-an-intervention-scientist-use-the-resources-on-this-page" class="section level3">
+<h3>How can an intervention scientist use the resources on this
+page?</h3>
 <p>This information may be useful in helping researchers to
 conceptualize the kinds of questions which each design can address, and
 in providing a partial template for the analysis of data from those
 designs.</p>
 </div>
-<div id="see-also" class="section level2">
-<h2>See also:</h2>
+<div id="see-also" class="section level3">
+<h3>See also:</h3>
 <ul>
 <li><p><a href="https://github.com/d3center-isr/hybrid-experimental-design">A more
 advanced example analysis</a> for a hybrid SMART-MRT in which only

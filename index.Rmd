@@ -6,11 +6,11 @@ output:
     toc_depth: 1 
 ---
 
-### On this page we provide example datasets, analysis code in SAS and R, and outputs, for the three kinds of hybrid experimental designs considered in this recent paper:
+#### On this page we provide example datasets, analysis code in SAS and R, and outputs, for the three kinds of hybrid experimental designs considered in this recent paper:
 
 > Nahum-Shani, I., Dziak, J. J., Venera, H., Spring, B., & Dempsey W. (2023). [Design of Experiments with Sequential Randomizations at Multiple Time Scales: The Hybrid Experimental Design](https://link.springer.com/article/10.3758/s13428-023-02119-z). *Behavior Research Methods*, [doi:10.3758/s13428-023-02119-z](https://doi.org/10.3758/s13428-023-02119-z). 
 
-### Each example is based on a hypothetical study to answer questions which inform the design of weight loss interventions integrating multiple components.  More details on the motivation and interpretation for each example is given in Nahum-Shani et al (2023).
+#### Each example is based on a hypothetical study to answer questions which inform the design of weight loss interventions integrating multiple components.  More details on the motivation and interpretation for each example is given in Nahum-Shani et al (2023).
 
 # Hybrid Factorial-SMART
 
@@ -23,11 +23,17 @@ In the example hybrid factorial-SMART, the hypothetical intervention would begin
 The first question is addressed by a 2*2 factorial randomization in the initial randomization stage.  The second question is addressed by a second-stage random assignment of nonresponders to `stay the course' or to additionally add meal replacement. The resulting design is a hybrid factorial-SMART.
 
 
-## [Simulated Data](Simulated_Data_Hybrid_Factorial_SMART.csv)
+### Downloads
 
-## [Analysis Code for R](Analyze_Simulated_Data_Hybrid_Factorial_SMART.R)
+- [Simulated Data](Simulated_Data_Hybrid_Factorial_SMART.csv)
 
-## Sample Output from R
+- [Analysis Code for SAS](Analyze_Simulated_Data_Hybrid_Factorial_SMART.sas)
+
+- [Sample Output from SAS](factorial-smart-results.pdf)
+
+- [Analysis Code for R](Analyze_Simulated_Data_Hybrid_Factorial_SMART.R)
+
+### Sample Output from R
 
 ```
 Call:
@@ -56,24 +62,24 @@ Estimated Scale Parameters:
 (Intercept)    4.902  0.3208
 Number of clusters:   400  Maximum cluster size: 2 
 ```
-
-## [Analysis Code for SAS](Analyze_Simulated_Data_Hybrid_Factorial_SMART.sas)
-
-## [Sample Output from SAS](factorial-smart-results.pdf)
  
 # Hybrid Factorial-MRT
          
 In the example hybrid factorial-MRT, 
 
+### Downloads
+- [Simulated Occasion-Level Data](Simulated_Data_Hybrid_Factorial_MRT_occasion_level.csv)
 
-## [Simulated Occasion-Level Data](Simulated_Data_Hybrid_Factorial_MRT_occasion_level.csv)
+- [Simulated Person-Level Data](Simulated_Data_Hybrid_Factorial_MRT_person_level.csv)
 
-## [Simulated Person-Level Data](Simulated_Data_Hybrid_Factorial_MRT_person_level.csv)
+- [Analysis Code for R](Analyze_Simulated_Data_Hybrid_Factorial_MRT.R)
 
-## [Analysis Code for R](Analyze_Simulated_Data_Hybrid_Factorial_MRT.R)
+- [Analysis Code for SAS](Analyze_Simulated_Data_Hybrid_Factorial_MRT.sas)
 
-##  Sample Output from R
-### Distal:
+- [Sample Output from SAS](factorial-mrt-results.pdf) 
+
+###  Sample Output from R
+#### Distal:
 ```
 
 Call:
@@ -99,7 +105,7 @@ Residual standard error: 2.47 on 394 degrees of freedom
 Multiple R-squared:  0.0837,	Adjusted R-squared:  0.0721 
 F-statistic:  7.2 on 5 and 394 DF,  p-value: 1.82e-06
 ```
-### Proximal:
+#### Proximal:
 ```
 Call:
 geeglm(formula = proximal_outcome ~ is_female + baseline_bmi_centered + 
@@ -129,21 +135,22 @@ Estimated Scale Parameters:
 Number of clusters:   400  Maximum cluster size: 84 
 ```
 
-## [Analysis Code for SAS](Analyze_Simulated_Data_Hybrid_Factorial_MRT.sas)
-
-## [Sample Output from SAS](factorial-mrt-results.pdf) 
-
 
 # Hybrid SMART-MRT
 
-## [Simulated Occasion-Level Data](Simulated_Data_Hybrid_SMART_MRT_occasion_level.csv)
+### Downloads
+- [Simulated Occasion-Level Data](Simulated_Data_Hybrid_SMART_MRT_occasion_level.csv)
 
-## [Simulated Person-Level Data](Simulated_Data_Hybrid_SMART_MRT_person_level.csv)
+- [Simulated Person-Level Data](Simulated_Data_Hybrid_SMART_MRT_person_level.csv)
 
-## [Analysis Code for R](Analyze_Simulated_Data_Hybrid_SMART_MRT.R)
+- [Analysis Code for SAS](Analyze_Simulated_Data_Hybrid_SMART_MRT.sas)
 
-## Sample Output from R
-### Distal
+- [Sample Output from SAS](smart-mrt-results.pdf) 
+
+- [Analysis Code for R](Analyze_Simulated_Data_Hybrid_SMART_MRT.R)
+
+### Sample Output from R
+#### Distal
 ```
 Call:
 geeglm(formula = final_kg_lost ~ is_female + baseline_bmi_centered + 
@@ -168,7 +175,7 @@ Estimated Scale Parameters:
 (Intercept)     6.38   0.469
 Number of clusters:   400  Maximum cluster size: 2 
 ```
-### Proximal
+#### Proximal
 ```
 Call:
 geeglm(formula = proximal_outcome ~ is_female + baseline_bmi_centered + 
@@ -198,22 +205,17 @@ Estimated Scale Parameters:
 Number of clusters:   400  Maximum cluster size: 168 
 ```
 
-## [Analysis Code for SAS](Analyze_Simulated_Data_Hybrid_SMART_MRT.sas)
-
-## [Sample Output from SAS](smart-mrt-results.pdf) 
-
-
 # Further Information
 
-## What resources does this page provide?
+### What resources does this page provide?
 
 This page provides links to simulated datasets and sample analysis code and output for three novel kinds of experimental designs for use in informing the development of multimodal adaptive interventions.
 
-## How can an intervention scientist use the resources on this page?
+### How can an intervention scientist use the resources on this page?
 
 This information may be useful in helping researchers to conceptualize the kinds of questions which each design can address, and in providing a partial template for the analysis of data from those designs.  
 
-## See also:
+### See also:
 
 - [A more advanced example analysis](https://github.com/d3center-isr/hybrid-experimental-design) for a hybrid SMART-MRT in which only nonresponders received the micro-randomized treatments, analyzed using a robust method which allows time-varying covariates.
  
