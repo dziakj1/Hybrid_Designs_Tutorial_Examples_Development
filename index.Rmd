@@ -14,13 +14,13 @@ output:
 
 # Hybrid Factorial-SMART
 
-In the example hybrid factorial-SMART, the hypothetical intervention would begin by providing a mobile app (*App*) and/or weekly coaching (*Coaching*).  Participants who show early signs of nonresponse after 2 weeks would be offered meal replacement (*Meal*).  The research questions are 
+In the example hybrid factorial-SMART, the hypothetical intervention being considered would begin by providing a mobile app (*App*) and/or weekly coaching (*Coaching*).  Participants who show early signs of nonresponse after 2 weeks would be offered meal replacement (*Meal*).  The research questions are 
 
-1. To achieve maximum weight loss at month 6, is it better to initially offer *App* and/or *Coaching*?
+- To achieve maximum weight loss at month 6, is it better to initially offer *App* and/or *Coaching*?
 
-2. For nonresponders, is it beneficial (in terms of weight loss at month 6) to add *Meal*?
+- For nonresponders, is it beneficial (in terms of weight loss at month 6) to add *Meal*?
 
-The first question is addressed by a 2*2 factorial randomization in the initial randomization stage.  The second question is addressed by a second-stage random assignment of nonresponders to `stay the course' or to additionally add meal replacement. The resulting design is a hybrid factorial-SMART.
+The first question is addressed by a 2*2 factorial randomization in the initial randomization stage.  The second question is addressed by a second-stage random assignment of nonresponders to 'stay the course' or to additionally add meal replacement. The resulting design is a hybrid factorial-SMART.
 
 
 ### Downloads
@@ -65,7 +65,7 @@ Number of clusters:   400  Maximum cluster size: 2
  
 # Hybrid Factorial-MRT
          
-In the example hybrid factorial-MRT, 
+In the example hybrid factorial-MRT,  the intervention being considered the initial intervention would include a supportive app that can be used to record dietary intake, and it might include coaching sessions (*Coaching*) and/or meal replacement (*Meal*). The researcher wants to determine whether either or both of these factors are sufficiently effective to be worth including, in terms of the final goal or 'distal outcome' of weight loss after six months. Also, during the course of the study, a mobile phone text prompt or push notification (*Prompt*) might be given on some days at noon, reminding the participant to monitor food intake.  The researcher wants to know whether this prompt improves the short-term goal or 'proximal outcome' of dietary self-monitoring that day. Thus there are separate questions, requiring separate analyses, for the  distal and proximal  outcomes. 
 
 ### Downloads
 - [Simulated Occasion-Level Data](Simulated_Data_Hybrid_Factorial_MRT_occasion_level.csv)
@@ -137,6 +137,9 @@ Number of clusters:   400  Maximum cluster size: 84
 
 
 # Hybrid SMART-MRT
+
+In the example hybrid SMART-MRT, the intervention being considered 
+
 
 ### Downloads
 - [Simulated Occasion-Level Data](Simulated_Data_Hybrid_SMART_MRT_occasion_level.csv)
