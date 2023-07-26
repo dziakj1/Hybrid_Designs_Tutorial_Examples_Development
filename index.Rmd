@@ -14,65 +14,67 @@ Nahum-Shani, I., Dziak, J. J., Venera, H., Spring, B., & Dempsey W. (2023).
 The Hybrid Experimental Design](https://link.springer.com/article/10.3758/s13428-023-02119-z). 
 *Behavior Research Methods*, [doi:10.3758/s13428-023-02119-z](https://doi.org/10.3758/s13428-023-02119-z).
 
+Each example is based on a hypothetical study to answer questions which inform the design of weight loss interventions integrating multiple components.  More details on the motivation and interpretation for each example is given in Nahum-Shani et al (2023).
 
 # Hybrid Factorial-SMART
 
-- Simulated Data
+In the example hybrid factorial-SMART, the hypothetical intervention would begin by providing a mobile app (*App*) and/or weekly coaching (*Coaching*).  Participants who show early signs of nonresponse after 2 weeks would be offered meal replacement (*Meal*).  The research questions are 
 
-- Analysis Code for R
+1. To achieve maximum weight loss at month 6, is it better to initially offer *App* and/or *Coaching*?
 
-  Sample Output from R:
-  ```
-  hello world i'm r
-  ```
+2. For nonresponders, is it beneficial (in terms of weight loss at month 6) to add *Meal*?
 
-- Analysis Code for SAS
+The first question is addressed by a 2*2 factorial randomization in the initial randomization stage.  The second question is addressed by a second-stage random assignment of nonresponders to `stay the course' or to additionally add meal replacement. The resulting design is a hybrid factorial-SMART.
 
-  Sample Output from SAS:
+
+- [Simulated Data](Simulated_Data_Hybrid_Factorial_SMART.csv)
+
+- [Analysis Code for R](Analyze_Simulated_Data_Hybrid_Factorial_SMART.R)
+
+-  [Sample Output from R]()
+  
+
+- [Analysis Code for SAS](Analyze_Simulated_Data_Hybrid_Factorial_SMART.sas)
+
+-  [Sample Output from SAS](factorial-smart-results.pdf)
  
-  ```
-  hello world i'm sas
-  ```
-           
+
+
 # Hybrid Factorial-MRT
+           
+           
+In the example hybrid factorial-MRT, 
 
-- Simulated Occasion-Level Data
+- [Simulated Occasion-Level Data](Simulated_Data_Hybrid_Factorial_MRT_occasion_level.csv)
+- [Simulated Person-Level Data](Simulated_Data_Hybrid_Factorial_MRT_person_level.csv)
 
-- Simulated Person-Level Data
 
-- Analysis Code for R
+- [Analysis Code for R](Analyze_Simulated_Data_Hybrid_Factorial_MRT.R)
 
-  Sample Output from R:
-  ```
-  hello world i'm r
-  ```
+-  [Sample Output from R]() 
 
-- Analysis Code for SAS
 
-  Sample Output from SAS:
-  ```
-  hello world i'm sas
-  ```
+
+- [Analysis Code for SAS](Analyze_Simulated_Data_Hybrid_Factorial_MRT.sas)
+
+- [Sample Output from SAS](factorial-mrt-results.pdf) 
+
 
 # Hybrid SMART-MRT
 
-- Simulated Occasion-Level Data
+- [Simulated Occasion-Level Data](Simulated_Data_Hybrid_SMART_MRT_occasion_level.csv)
 
-- Simulated Person-Level Data
+- [Simulated Person-Level Data](Simulated_Data_Hybrid_SMART_MRT_person_level.csv)
 
-- Analysis Code for R
+- [Analysis Code for R](Analyze_Simulated_Data_Hybrid_SMART_MRT.R)
 
-  Sample Output from R:
-  ```
-  hello world i'm r
-  ```
+- [Sample Output from R]() 
 
-- Analysis Code for SAS
+- [Analysis Code for SAS](Analyze_Simulated_Data_Hybrid_SMART_MRT.sas)
 
-  Sample Output from SAS:
-  ```
-  hello world i'm sas
-  ```
+- [Sample Output from SAS](smart-mrt-results.pdf) 
+
+
 
 # Further Information
 
@@ -86,3 +88,7 @@ The Hybrid Experimental Design](https://link.springer.com/article/10.3758/s13428
 - [A more advanced example analysis](https://github.com/d3center-isr/hybrid-experimental-design) for a hybrid SMART-MRT in which only nonresponders received the micro-randomized treatments, analyzed using a robust method which allows time-varying covariates.
  
 - [Open-access preprint of the *Behavior Research Methods* article](https://arxiv.org/abs/2302.09046).
+
+
+
+
