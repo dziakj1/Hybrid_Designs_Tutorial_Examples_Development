@@ -24,7 +24,7 @@ In the example hybrid factorial-SMART, the hypothetical intervention being consi
 
 The first question is addressed by a 2*2 factorial randomization in the initial randomization stage.  The second question is addressed by a second-stage random assignment of nonresponders to 'stay the course' or to additionally add meal replacement. The resulting design is a hybrid factorial-SMART, illustrated in the figure below.
 
-![Example Hybrid Factorial-SMART from Nahum-Shani et al. (2023)](slide-factorial-smart.png)
+![*Example Hybrid Factorial-SMART from Nahum-Shani et al. (2023)*](slide-factorial-smart.png)
 
 
 ### Downloads
@@ -96,7 +96,7 @@ The researcher wants to investigate the following questions:
 - Are either or both of *Coaching* and *Meal*  sufficiently effective to be worth including at the beginning, in terms of the final goal or 'distal outcome' of weight loss after six months?
 - Is *Prompt* effective, on the day when it is given, in improving the probability that the participant will engage with dietary tracking?
 
-![Example Hybrid Factorial-MRT from Nahum-Shani et al. (2023)](slide-factorial-mrt.png)
+![*Example Hybrid Factorial-MRT from Nahum-Shani et al. (2023)*](slide-factorial-mrt.png)
 
 ### Downloads
 
@@ -191,7 +191,7 @@ We don't test the effect of an individual occasion-level prompt (e.g., on a part
 
 In the example hybrid SMART-MRT, the intervention being considered will begin with a mobile app to facilitate dietary self-monitoring, but the researcher wonders whether it might be beneficial to augment this by adding in-person coaching (*Coaching*), in terms of improving the distal outcome of six-month weight loss.  For nonresponders to the initial intervention, as assessed after 2 weeks, the researcher also wants to know whether it might be beneficial to add meal replacement (*Meal*), in terms of improving the distal outcome.  Also, the researcher wants to know whether it is beneficial on a given day to give a mobile text prompt (*Prompt*) encouraging self-monitoring, in terms of improving the proximal outcome of engagement with the self-monitoring app that day.
 
-![Example Hybrid SMART-MRT from Nahum-Shani et al. (2023)](slide-smart-mrt.png)
+![*Example Hybrid SMART-MRT from Nahum-Shani et al. (2023)*](slide-smart-mrt.png)
 
 ### Downloads
 
@@ -237,6 +237,13 @@ Estimated Scale Parameters:
 Number of clusters:   400  Maximum cluster size: 2 
 ```
 
+Coaching has a strongly statistically significant main effect (p<.001), 
+representing twice .66 or about 1.3 kilograms lost.  Thus, it may be 
+considered worthwhile if resources allow. The meal replacement program did not
+have a statistically significant effect in this hypothetical trial (p=.240),
+so it would probably not be considered worth the additional expense. The
+two factors did not significantly interact.
+
 The ``cluster size'' above is given as 2, which might seem confusing because the outcome is supposed to be person-level. This happens because the estimation is done using a weighting and replication method (W&R), which treats people who were not randomized to a level of the Stage II factor as if they were clusters of two people: one who was randomized to +1 and one to -1 on that factor. The true sample size without replicates is taken into account in the standard error. This is explained further [elsewhere](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3825557/).
 
 
@@ -270,13 +277,17 @@ Estimated Scale Parameters:
 Number of clusters:   400  Maximum cluster size: 168 
 ```
 
+The prompts factor (*A*) again does not have a statistically significant main effect (p=.103). 
+It does have a significant and positive interaction with coaching, however (p=0.030).  Therefore, if coaching is being provided, then prompts may also be useful. 
+
+
 ***
 
 # Further Information
 
 ### What resources does this page provide?
 
-This page provides links to simulated datasets and sample analysis code and output for three novel kinds of experimental designs for use in informing the development of [multimodal adaptive interventions](https://d3c.isr.umich.edu/integration/#madi).
+This page provides links to simulated datasets, sample analysis code, and output for three novel kinds of experimental designs for use in informing the development of [multimodal adaptive interventions](https://d3c.isr.umich.edu/integration/#madi).
 
 ### How can an intervention scientist use the resources on this page?
 
