@@ -22,6 +22,8 @@ In the example hybrid factorial-SMART, the hypothetical intervention being consi
 
 The first question is addressed by a 2*2 factorial randomization in the initial randomization stage.  The second question is addressed by a second-stage random assignment of nonresponders to 'stay the course' or to additionally add meal replacement. The resulting design is a hybrid factorial-SMART.
 
+![Example Hybrid Factorial-SMART from Nahum-Shani et al. (2023)](slide-factorial-smart.png)
+
 
 ### Downloads
 
@@ -65,7 +67,10 @@ Number of clusters:   400  Maximum cluster size: 2
  
 # Hybrid Factorial-MRT
          
-In the example hybrid factorial-MRT,  the intervention being considered the initial intervention would include a supportive app that can be used to record dietary intake, and it might include coaching sessions (*Coaching*) and/or meal replacement (*Meal*). The researcher wants to determine whether either or both of these factors are sufficiently effective to be worth including, in terms of the final goal or 'distal outcome' of weight loss after six months. Also, during the course of the study, a mobile phone text prompt or push notification (*Prompt*) might be given on some days at noon, reminding the participant to monitor food intake.  The researcher wants to know whether this prompt improves the short-term goal or 'proximal outcome' of dietary self-monitoring that day. Thus there are separate questions, requiring separate analyses, for the  distal and proximal  outcomes. 
+In the example hybrid factorial-MRT,  the intervention being considered the initial intervention would include a supportive app that can be used to record dietary intake, and it might include coaching sessions (*Coaching*) and/or meal replacement (*Meal*). The researcher wants to determine whether either or both of these factors are sufficiently effective to be worth including, in terms of the final goal or 'distal outcome' of weight loss after six months. Also, during the course of the study, a mobile phone text prompt or push notification (*Prompt*) might be given on some days at noon, reminding the participant to monitor food intake.  The researcher wants to know whether this prompt improves the short-term goal or 'proximal outcome' of dietary self-monitoring that day. Thus there are separate questions, requiring separate analyses, for the  distal and proximal outcomes. 
+
+![Example Hybrid Factorial-MRT from Nahum-Shani et al. (2023)](slide-factorial-mrt.png)
+
 
 ### Downloads
 - [Simulated Occasion-Level Data](Simulated_Data_Hybrid_Factorial_MRT_occasion_level.csv)
@@ -138,8 +143,9 @@ Number of clusters:   400  Maximum cluster size: 84
 
 # Hybrid SMART-MRT
 
-In the example hybrid SMART-MRT, the intervention being considered will begin with a mobile app to facilitate dietary self-monotoring, but the researcher wonders whether it might be beneficial to augment this by adding in-person coaching (*Coaching*), in terms of improving the distal outcome of six-month weight loss.  For nonresponders to the initial intervention, as assessed after 2 weeks, the researcher also wants to know whether it might be beneficial to add meal replacement (*Meal*), in terms of improving the distal outcome.  Also, the researcher wants to know whether it is beneficial on a given day to give a mobile text prompt (*Prompt*) encouraging self-monitoring, in terms of improving the proximal outcome of engagement with the self-monitoring app that day.
+In the example hybrid SMART-MRT, the intervention being considered will begin with a mobile app to facilitate dietary self-monitoring, but the researcher wonders whether it might be beneficial to augment this by adding in-person coaching (*Coaching*), in terms of improving the distal outcome of six-month weight loss.  For nonresponders to the initial intervention, as assessed after 2 weeks, the researcher also wants to know whether it might be beneficial to add meal replacement (*Meal*), in terms of improving the distal outcome.  Also, the researcher wants to know whether it is beneficial on a given day to give a mobile text prompt (*Prompt*) encouraging self-monitoring, in terms of improving the proximal outcome of engagement with the self-monitoring app that day.
 
+![Example Hybrid SMART-MRT from Nahum-Shani et al. (2023)](slide-smart-mrt.png)
 
 ### Downloads
 - [Simulated Occasion-Level Data](Simulated_Data_Hybrid_SMART_MRT_occasion_level.csv)
