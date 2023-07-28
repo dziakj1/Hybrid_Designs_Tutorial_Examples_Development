@@ -1,22 +1,28 @@
 ---
 title: "Demonstration Datasets for Hybrid Experimental Designs"
+author: "John J. Dziak and Inbal Nahum-Shani"
 output:
   html_document:
     toc: true
     toc_depth: 1 
 ---
 
-#### On this page we provide example datasets, analysis code in SAS and R, and outputs, for the three kinds of [hybrid experimental designs](https://d3c.isr.umich.edu/integration/#hed) considered in this recent paper:
+#### On this page, we provide example datasets, analysis code in SAS and R, and outputs, for the three kinds of [hybrid experimental designs](https://d3c.isr.umich.edu/integration/#hed) considered in this recent paper:
 
 > Nahum-Shani, I., Dziak, J. J., Venera, H., Spring, B., & Dempsey W. (2023). [Design of Experiments with Sequential Randomizations at Multiple Time Scales: The Hybrid Experimental Design](https://link.springer.com/article/10.3758/s13428-023-02119-z). *Behavior Research Methods*, [doi:10.3758/s13428-023-02119-z](https://doi.org/10.3758/s13428-023-02119-z). 
 
-#### Each example is based on a hypothetical study to answer questions which inform the design of weight loss interventions integrating multiple components.  More details on the motivation and interpretation for each example is given in Nahum-Shani et al (2023).
+#### Each example is based on a hypothetical study to answer specific questions about how to design potential weight loss interventions that integrate multiple components.  More details on the motivation and interpretation for each example is given in Nahum-Shani et al (2023).  
+
+The specific hybrids considered combine :
+- a classic factorial experiment with a sequential multiple assignment randomized trial [(SMART)](https://d3c.isr.umich.edu/intervention-designs/adaptive-interventions/#smart),
+- a classic factorial experiment with a micro-randomized trial [(MRT)](https://d3c.isr.umich.edu/mobilehealth/#mrt), or 
+- a SMART with an MRT.
 
 *** 
 
 # Hybrid Factorial-SMART
 
-In the example hybrid factorial-SMART, the hypothetical intervention being considered would begin by providing a mobile app (*App*) and/or weekly coaching (*Coaching*).  Participants who show early signs of nonresponse after 2 weeks would be offered meal replacement (*Meal*).  The research questions are 
+In the example of hybrid factorial-SMART, the hypothetical intervention being considered would begin by providing a mobile app (*App*) and/or weekly coaching (*Coaching*).  Participants who show early signs of nonresponse after 2 weeks would be offered meal replacement (*Meal*).  The research questions are 
 
 - To achieve maximum weight loss at month 6, is it better to initially offer *App* and/or *Coaching*?
 
@@ -42,13 +48,13 @@ The links below allow you to download the simulated data, and code to analyze it
 ### Sample Output from R
 
 Below is part of the output generated from the R analysis code, using the 
-[geeglm function from the publicly available geepack R package] (https://cran.r-project.org/web/packages/geepack/geepack.pdf)
+[geeglm function from the publicly available geepack R package](https://cran.r-project.org/web/packages/geepack/geepack.pdf)
 to solve the weighted and replicated estimating equations
-used in analyzing the design (see Nahum-Shani et al., 2023, for details)
+used in analyzing the simulated data from the design (see Nahum-Shani et al., 2023, for details). The output below shows the fitted coefficients for a model predicting the final outcome from all of the experimental factors and two baseline covariates.
 
 ```
-Call:
-geeglm(formula = model_formula, data = data_for_analysis, weights = replicate_weight, 
+Call:geeglm(formula = final_kg_lost ~ is_female + baseline_bmi_centered + 
+    app * coaching * meal, data = data_for_analysis, weights = replicate_weight, 
     id = ID, corstr = "independence")
 
  Coefficients:
@@ -75,26 +81,27 @@ Number of clusters:   400  Maximum cluster size: 2
 ```
  
 The output provides information to help answer the scientific questions.
+The output provides some useful tests and estimates.
 
-- There is a statistically significant beneficial main effect of the *Coaching* factor (p<.001).  Because the factor was effect-coded with yes represented as +1 and no as -1,
-the main effect (average final outcome difference between the yes and no levels) 
-is twice the regression coefficient, thus 2 * 0.7145, or about 1.4 more kilograms lost, which may also be clinically significant.  The *App* factor does not have a statistically significant main effect (p=.2893) so there is no evidence that the app is beneficial on average. There doesn't seem to be a significant interaction between *Coaching* and *App* (p=.3142), so we can make decisions based on their main effects alone.  It looks like there is reason to begin the intervention with Coaching, but not necessarily with App.
+- There is a statistically significant beneficial main effect of the *Coaching* factor (p<.001).  Because the factor was effect-coded, with yes represented as +1 and no as -1, the main effect (average final outcome difference between the yes and no levels) is twice the regression coefficient. Thus, the main effect of *Coaching* is two times 0.7145, or about 1.4 more kilograms lost.  The *App* factor does not have a statistically significant main effect (p=.2893) so there is no credible evidence that the app is beneficial on average. There also doesn't seem to be a significant interaction between *Coaching* and *App* (p=.3142), so we can make decisions based on their main effects alone.  It looks like there is justification for beginning the intervention with Coaching, but not necessarily with App.
 
-- The *Meal* factor for nonresponders has a statistically significant main effect (p<.001).  The main effect is twice 0.9270, or about 1.8 kilograms, which may be clinically significant. There is also a beneficial interaction (possible synergy) between *Coaching* and *Meal*.
+- The *Meal* factor for nonresponders has a statistically significant main effect (p<.001).  The main effect is twice 0.9270, or about 1.8 kilograms, which may be clinically significant. There is also a beneficial interaction (possible synergy) between *Coaching* and *Meal* (p=0.00114).
 
-Biological sex (coded +1 for female and -1 for male), and baseline BMI, also centered at 0, are  included as covariates in the example analysis, mainly to account for extra error variance, but their coefficients are not considered directly relevant to the research questions.  Nonetheless, higher BMI seems to be associated with lower weight loss (p<.001) but sex does not seem to matter.
+Biological sex (coded +1 for female and -1 for male), and baseline BMI, also centered at 0, are  included as covariates in the example analysis. This is done mainly to account for extra error variance, and their coefficients do not directly address  the main research questions.  Nonetheless, higher BMI seems to be associated with lower weight loss (p<.001), although sex does not seem to matter.
 
-Note that, of course, this is simulated data from a hypothetical study, so it should not be considered for making real-world conclusions.  It is only provided as a template for planning and analyzing future real studies.  Also, note that this example does not contain information on costs, which would also be an issue in deploying the proposed intervention in the real world (especially because meal replacement can be expensive).  Cost-effectiveness would be a separate analysis.
+Of course, this is simulated data from a hypothetical study, so the 'results' reported here should not be considered for making real-world conclusions.  They are only provided as a template for planning, analyzing and interpreting future real studies.  Also, note that this example does not contain information on costs, which would also be an issue in judging the practical significance and scalability of the observed effect, especially because meal replacement can be expensive; cost-effectiveness would be a separate analysis.
 
 ***
  
 # Hybrid Factorial-MRT
          
-In the example hybrid factorial-MRT,  the intervention being considered the initial intervention would include a supportive app that can be used to record dietary intake, and it might include coaching sessions (*Coaching*) and/or meal replacement (*Meal*), which would be offered at the beginning and continue throughout the study. Also, during the course of the study, a mobile phone text prompt or push notification (*Prompt*) might be given on some days at noon, reminding the participant to monitor food intake.  The researcher wants to know whether this prompt improves the short-term goal or 'proximal outcome' of dietary self-monitoring that day. Thus there are separate questions, requiring separate analyses, for the  distal and proximal outcomes. 
+For the hybrid factorial-MRT example, the intervention being considered is now slightly different. It would initially offer a supportive app that can be used to record dietary intake, and it might also offer coaching sessions (*Coaching*) and/or meal replacement (*Meal*) along with the app.  Either or both of these would be offered at the beginning of the study and continue throughout the study, and meal replacement would not be limited to nonresponders as before. As before, the researcher wants to know whether either or both of these factors would have an effect on the final (distal) outcome of weight loss after six months.
+
+However, now during the course of the study, a mobile phone text prompt or push notification (*Prompt*) might be given on some days at noon, reminding the participant to monitor food intake.  The researcher wants to know whether this prompt improves the short-term goal or 'proximal outcome' of dietary self-monitoring that day. Thus there are separate questions, requiring separate analyses, for the  distal outcome at the participant level and the proximal outcomes at the observation level within participant. 
 
 The researcher wants to investigate the following questions:
-- Are either or both of *Coaching* and *Meal*  sufficiently effective to be worth including at the beginning, in terms of the final goal or 'distal outcome' of weight loss after six months?
-- Is *Prompt* effective, on the day when it is given, in improving the probability that the participant will engage with dietary tracking?
+- Are either or both of *Coaching* and *Meal*   effective, in terms of improving the  'distal outcome' of weight loss after six months?
+- Is *Prompt* effective, on the day when it is given, in improving the proximal outcome, i.e., the  probability that the participant will engage with dietary tracking that day?
 
 ![*Example Hybrid Factorial-MRT from Nahum-Shani et al. (2023)*](slide-factorial-mrt.png)
 
@@ -114,9 +121,7 @@ The simulated data and analysis code can be downloaded from the links below.
 
 ###  Sample Output from R
 
-We need to fit separate models for the distal and the proximal outcome.
-The distal outcome is observed on the person-level; it happens once per person.
-In contrast, the proximal outcome happens once per day per person.
+It is necessary here  to fit separate models for the distal and the proximal outcomes. The distal outcome is observed on the person level; it happens once per person. In contrast, the proximal outcome happens once per day per person.
 
 #### Distal:
 
@@ -291,11 +296,11 @@ This page provides links to simulated datasets, sample analysis code, and output
 
 ### How can an intervention scientist use the resources on this page?
 
-This information may be useful in helping researchers to conceptualize the kinds of questions which each design can address, and in providing a partial template for the analysis of data from those designs.  
+This information may be useful in helping researchers to conceptualize the kinds of questions that each design can address, and in providing a partial template for the analysis of data from those designs.  
 
 ### See also:
 
-- [A more advanced example analysis](https://github.com/d3center-isr/hybrid-experimental-design) for a hybrid SMART-MRT in which only nonresponders received the micro-randomized treatments, analyzed using a robust method which allows time-varying covariates.
+- [A more advanced example analysis](https://github.com/d3center-isr/hybrid-experimental-design) for a hybrid SMART-MRT in which only nonresponders received the micro-randomized treatments. This example is analyzed using a robust method which allows the use of time-varying covariates.
  
 - [Open-access preprint of the *Behavior Research Methods* article](https://arxiv.org/abs/2302.09046)
  
