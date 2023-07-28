@@ -6,7 +6,7 @@ output:
     toc_depth: 1 
 ---
 
-#### On this page we provide example datasets, analysis code in SAS and R, and outputs, for the three kinds of hybrid experimental designs considered in this recent paper:
+#### On this page we provide example datasets, analysis code in SAS and R, and outputs, for the three kinds of [hybrid experimental designs](https://d3c.isr.umich.edu/integration/#hed) considered in this recent paper:
 
 > Nahum-Shani, I., Dziak, J. J., Venera, H., Spring, B., & Dempsey W. (2023). [Design of Experiments with Sequential Randomizations at Multiple Time Scales: The Hybrid Experimental Design](https://link.springer.com/article/10.3758/s13428-023-02119-z). *Behavior Research Methods*, [doi:10.3758/s13428-023-02119-z](https://doi.org/10.3758/s13428-023-02119-z). 
 
@@ -20,12 +20,14 @@ In the example hybrid factorial-SMART, the hypothetical intervention being consi
 
 - For nonresponders, is it beneficial (in terms of weight loss at month 6) to add *Meal*?
 
-The first question is addressed by a 2*2 factorial randomization in the initial randomization stage.  The second question is addressed by a second-stage random assignment of nonresponders to 'stay the course' or to additionally add meal replacement. The resulting design is a hybrid factorial-SMART.
+The first question is addressed by a 2*2 factorial randomization in the initial randomization stage.  The second question is addressed by a second-stage random assignment of nonresponders to 'stay the course' or to additionally add meal replacement. The resulting design is a hybrid factorial-SMART, illustrated in the figure below.
 
 ![Example Hybrid Factorial-SMART from Nahum-Shani et al. (2023)](slide-factorial-smart.png)
 
 
 ### Downloads
+
+The links below allow you to download the simulated data, and code to analyze it in [R](https://www.r-project.org/) and [SAS](https://www.sas.com/en_us/home.html).
 
 - [Simulated Data](Simulated_Data_Hybrid_Factorial_SMART.csv)
 
@@ -36,6 +38,11 @@ The first question is addressed by a 2*2 factorial randomization in the initial 
 - [Analysis Code for R](Analyze_Simulated_Data_Hybrid_Factorial_SMART.R)
 
 ### Sample Output from R
+
+Below is part of the output generated from the R analysis code, using the 
+[geeglm function from the publicly available geepack R package] (https://cran.r-project.org/web/packages/geepack/geepack.pdf)
+to solve the weighted and replicated estimating equations
+used in analyzing the design (see Nahum-Shani et al., 2023, for details)
 
 ```
 Call:
@@ -65,14 +72,33 @@ Estimated Scale Parameters:
 Number of clusters:   400  Maximum cluster size: 2 
 ```
  
+The output provides information to help answer the scientific questions.
+
+- There is a statistically significant beneficial main effect of the *Coaching* factor (p<.001).  Because the factor was effect-coded with yes represented as +1 and no as -1,
+the main effect (average final outcome difference between the yes and no levels) 
+is twice the regression coefficient, thus 2 * 0.7145, or about 1.4 more kilograms lost, which may also be clinically significant.  The *App* factor does not have a statistically significant main effect (p=.2893) so there is no evidence that the app is beneficial on average. There doesn't seem to be a significant interaction between *Coaching* and *App* (p=.3142), so we can make decisions based on their main effects alone.  It looks like there is reason to begin the intervention with Coaching, but not necessarily with App.
+
+- The *Meal* factor for nonresponders has a statistically significant main effect (p<.001).  The main effect is twice 0.9270, or about 1.8 kilograms, which may be clinically significant. There is also a beneficial interaction (possible synergy) between *Coaching* and *Meal*.
+
+Biological sex (coded +1 for female and -1 for male), and baseline BMI, also centered at 0, are  included as covariates in the example analysis, mainly to account for extra error variance, but their coefficients are not considered directly relevant to the research questions.  Nonetheless, higher BMI seems to be associated with lower weight loss (p<.001) but sex does not seem to matter.
+
+Note that, of course, this is simulated data from a hypothetical study, so it should not be considered for making real-world conclusions.  It is only provided as a template for planning and analyzing future real studies.  Also, note that this example does not contain information on costs, which would also be an issue in deploying the proposed intervention in the real world (especially because meal replacement can be expensive).  Cost-effectiveness would be a separate analysis.
+
+ 
 # Hybrid Factorial-MRT
          
-In the example hybrid factorial-MRT,  the intervention being considered the initial intervention would include a supportive app that can be used to record dietary intake, and it might include coaching sessions (*Coaching*) and/or meal replacement (*Meal*). The researcher wants to determine whether either or both of these factors are sufficiently effective to be worth including, in terms of the final goal or 'distal outcome' of weight loss after six months. Also, during the course of the study, a mobile phone text prompt or push notification (*Prompt*) might be given on some days at noon, reminding the participant to monitor food intake.  The researcher wants to know whether this prompt improves the short-term goal or 'proximal outcome' of dietary self-monitoring that day. Thus there are separate questions, requiring separate analyses, for the  distal and proximal outcomes. 
+In the example hybrid factorial-MRT,  the intervention being considered the initial intervention would include a supportive app that can be used to record dietary intake, and it might include coaching sessions (*Coaching*) and/or meal replacement (*Meal*), which would be offered at the beginning and continue throughout the study. Also, during the course of the study, a mobile phone text prompt or push notification (*Prompt*) might be given on some days at noon, reminding the participant to monitor food intake.  The researcher wants to know whether this prompt improves the short-term goal or 'proximal outcome' of dietary self-monitoring that day. Thus there are separate questions, requiring separate analyses, for the  distal and proximal outcomes. 
+
+The researcher wants to investigate the following questions:
+- Are either or both of *Coaching* and *Meal*  sufficiently effective to be worth including at the beginning, in terms of the final goal or 'distal outcome' of weight loss after six months?
+- Is *Prompt* effective, on the day when it is given, in improving the probability that the participant will engage with dietary tracking?
 
 ![Example Hybrid Factorial-MRT from Nahum-Shani et al. (2023)](slide-factorial-mrt.png)
 
-
 ### Downloads
+
+The simulated data and analysis code can be downloaded from the links below.
+
 - [Simulated Occasion-Level Data](Simulated_Data_Hybrid_Factorial_MRT_occasion_level.csv)
 
 - [Simulated Person-Level Data](Simulated_Data_Hybrid_Factorial_MRT_person_level.csv)
@@ -84,7 +110,15 @@ In the example hybrid factorial-MRT,  the intervention being considered the init
 - [Sample Output from SAS](factorial-mrt-results.pdf) 
 
 ###  Sample Output from R
+
+We need to fit separate models for the distal and the proximal outcome.
+The distal outcome is observed on the person-level; it happens once per person.
+In contrast, the proximal outcome happens once per day per person.
+
 #### Distal:
+
+Sample output from the distal (person-level) analysis is shown below.
+
 ```
 
 Call:
@@ -110,6 +144,9 @@ Residual standard error: 2.47 on 394 degrees of freedom
 Multiple R-squared:  0.0837,	Adjusted R-squared:  0.0721 
 F-statistic:  7.2 on 5 and 394 DF,  p-value: 1.82e-06
 ```
+
+
+
 #### Proximal:
 ```
 Call:
@@ -148,6 +185,9 @@ In the example hybrid SMART-MRT, the intervention being considered will begin wi
 ![Example Hybrid SMART-MRT from Nahum-Shani et al. (2023)](slide-smart-mrt.png)
 
 ### Downloads
+
+The simulated data and analysis code can be downloaded from the links below.
+
 - [Simulated Occasion-Level Data](Simulated_Data_Hybrid_SMART_MRT_occasion_level.csv)
 
 - [Simulated Person-Level Data](Simulated_Data_Hybrid_SMART_MRT_person_level.csv)
@@ -159,6 +199,9 @@ In the example hybrid SMART-MRT, the intervention being considered will begin wi
 - [Analysis Code for R](Analyze_Simulated_Data_Hybrid_SMART_MRT.R)
 
 ### Sample Output from R
+
+Again, we need to fit separate models for the distal and the proximal outcome.
+
 #### Distal
 ```
 Call:
@@ -184,6 +227,9 @@ Estimated Scale Parameters:
 (Intercept)     6.38   0.469
 Number of clusters:   400  Maximum cluster size: 2 
 ```
+
+The output suggests answers to the two questions of interest. 
+
 #### Proximal
 ```
 Call:
@@ -218,7 +264,7 @@ Number of clusters:   400  Maximum cluster size: 168
 
 ### What resources does this page provide?
 
-This page provides links to simulated datasets and sample analysis code and output for three novel kinds of experimental designs for use in informing the development of multimodal adaptive interventions.
+This page provides links to simulated datasets and sample analysis code and output for three novel kinds of experimental designs for use in informing the development of [multimodal adaptive interventions](https://d3c.isr.umich.edu/integration/#madi).
 
 ### How can an intervention scientist use the resources on this page?
 
