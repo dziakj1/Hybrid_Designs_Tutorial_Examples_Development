@@ -664,7 +664,11 @@ for R</a></p></li>
 <div id="sample-output-from-r-2" class="section level3">
 <h3>Sample Output from R</h3>
 <p>Again, we need to fit separate models for the distal and the proximal
-outcome.</p>
+outcome. The output looks very similar to the factorial-MRT example,
+which is not surprising because a SMART is a special kind of factorial
+design. However, the analysis for the SMART was different: it took into
+account the fact that not only nonresponders were randomized to a level
+of the <em>meal</em> factor.</p>
 <div id="distal-1" class="section level4">
 <h4>Distal</h4>
 <pre><code>Call:
@@ -689,7 +693,14 @@ Estimated Scale Parameters:
             Estimate Std.err
 (Intercept)     6.38   0.469
 Number of clusters:   400  Maximum cluster size: 2 </code></pre>
-<p>The output suggests answers to the two questions of interest.</p>
+<p>The ``cluster size’’ above is given as 2, which might seem confusing
+because the outcome is supposed to be person-level. This happens because
+the estimation is done using a weighting and replication method
+(W&amp;R), which treats people who were not randomized to a level of the
+Stage II factor as if they were clusters of two people: one who was
+randomized to +1 and one to -1 on that factor. The true sample size
+without replicates is taken into account in the standard error. This is
+explained further <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3825557/">elsewhere</a>.</p>
 </div>
 <div id="proximal-1" class="section level4">
 <h4>Proximal</h4>
@@ -719,6 +730,7 @@ Estimated Scale Parameters:
             Estimate Std.err
 (Intercept)        1 0.00283
 Number of clusters:   400  Maximum cluster size: 168 </code></pre>
+<hr />
 </div>
 </div>
 </div>
