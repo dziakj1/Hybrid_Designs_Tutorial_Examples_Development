@@ -13,9 +13,12 @@ output:
 
 #### Each example is based on a hypothetical study to answer specific questions about how to design potential weight loss interventions that integrate multiple components.  More details on the motivation and interpretation for each example is given in Nahum-Shani et al (2023).  
 
-The specific hybrids considered combine :
+#### The specific hybrids considered combine:
+
 - a classic factorial experiment with a sequential multiple assignment randomized trial [(SMART)](https://d3c.isr.umich.edu/intervention-designs/adaptive-interventions/#smart),
+
 - a classic factorial experiment with a micro-randomized trial [(MRT)](https://d3c.isr.umich.edu/mobilehealth/#mrt), or 
+
 - a SMART with an MRT.
 
 *** 

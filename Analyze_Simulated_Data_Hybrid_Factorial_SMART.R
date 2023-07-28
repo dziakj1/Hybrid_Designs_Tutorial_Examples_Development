@@ -30,14 +30,10 @@ data_for_analysis <- data_for_analysis[order(data_for_analysis$ID,
 rownames(data_for_analysis) <- NULL
 print(head(data_for_analysis))
 
-
-model_formula <- final_kg_lost ~ is_female + 
-  baseline_bmi_centered + 
-  app * coaching * meal
- 
-
 # Fit analysis model 
-weighted_and_replicated_model <- geeglm(formula = model_formula,
+weighted_and_replicated_model <- geeglm(formula = final_kg_lost ~ is_female + 
+                                          baseline_bmi_centered + 
+                                          app * coaching * meal,
                      id=ID, 
                      weights = replicate_weight, 
                      data=data_for_analysis,
