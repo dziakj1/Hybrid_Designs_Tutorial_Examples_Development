@@ -16,9 +16,7 @@ output:
 #### The specific hybrids considered combine:
 
 - a classic factorial experiment with a sequential multiple assignment randomized trial [(SMART)](https://d3c.isr.umich.edu/intervention-designs/adaptive-interventions/#smart),
-
 - a classic factorial experiment with a micro-randomized trial [(MRT)](https://d3c.isr.umich.edu/mobilehealth/#mrt), or 
-
 - a SMART with an MRT.
 
 *** 
@@ -28,7 +26,6 @@ output:
 In the example of hybrid factorial-SMART, the hypothetical intervention being considered would begin by providing a mobile app (*App*) and/or weekly coaching (*Coaching*).  Participants who show early signs of nonresponse after 2 weeks would be offered meal replacement (*Meal*).  The research questions are 
 
 - To achieve maximum weight loss at month 6, is it better to initially offer *App* and/or *Coaching*?
-
 - For nonresponders, is it beneficial (in terms of weight loss at month 6) to add *Meal*?
 
 The first question is addressed by a 2*2 factorial randomization in the initial randomization stage.  The second question is addressed by a second-stage random assignment of nonresponders to 'stay the course' or to additionally add meal replacement. The resulting design is a hybrid factorial-SMART, illustrated in the figure below.
@@ -103,6 +100,7 @@ For the hybrid factorial-MRT example, the intervention being considered is now s
 However, now during the course of the study, a mobile phone text prompt or push notification (*Prompt*) might be given on some days at noon, reminding the participant to monitor food intake.  The researcher wants to know whether this prompt improves the short-term goal or 'proximal outcome' of dietary self-monitoring that day. Thus there are separate questions, requiring separate analyses, for the  distal outcome at the participant level and the proximal outcomes at the observation level within participant. 
 
 The researcher wants to investigate the following questions:
+
 - Are either or both of *Coaching* and *Meal*   effective, in terms of improving the  'distal outcome' of weight loss after six months?
 - Is *Prompt* effective, on the day when it is given, in improving the proximal outcome, i.e., the  probability that the participant will engage with dietary tracking that day?
 
@@ -190,7 +188,7 @@ Number of clusters:   400  Maximum cluster size: 84
 
 In the output above, A represents the prompt factor.  It does not seem to have a statistically significant effect on the proximal outcome (p=.1073).  Perhaps participants are ignoring the prompt.  The coaching and meal factors do have an effect on the proximal outcome as well as the distal outcome; however, because they are long-term decisions, the distal outcome is probably more important to consider.  There may be a significant interaction between the prompt and the *Coaching* factor (p=.0346), in which the prompt is more effective if the participant has a coach. However, because the coaching factor doesn't seem to have an effect on the distal outcome, the interaction might not be enough to support including either the prompts or the coaching.
 
-We don't test the effect of an individual occasion-level prompt (e.g., on a particular day) on the distal outcome, because that would likely be too small to detect.  The hypothetical study isn't designed for comparing prompts versus no prompts on the distal outcome, because in this hypothetical design everyone got prompts about half the time; the main difference was which days.  So whether prompts are ever helpful in this intervention for this population is still unknown.  They do not at least seem to affect the proximal outcome very much. 
+We don't test the effect of an individual occasion-level prompt (e.g., on a particular day) on the distal outcome, because that would likely be too small to detect.  The hypothetical study isn't designed for comparing prompts versus no prompts at all on the distal outcome, because in this hypothetical design everyone got prompts about half the days; the main difference was which days.  So whether prompts are ever helpful in this intervention for this population is still unknown.  They do not at least seem to affect the proximal outcome  much. 
 
 
 ***
@@ -217,7 +215,7 @@ The simulated data and analysis code can be downloaded from the links below.
 
 ### Sample Output from R
 
-Again, we need to fit separate models for the distal and the proximal outcome. The output looks very similar to the factorial-MRT example, which is not surprising because a SMART is a special kind of factorial design. However, the analysis for the SMART was different: it took into account the fact that not only nonresponders were randomized to a level of the *meal* factor. 
+Again, we need to fit separate models for the distal and the proximal outcome. The output looks very similar to the factorial-MRT example, which is not surprising because a SMART is a special kind of factorial design. The difference from the factorial-MRT is that now the analysis for the SMART part of the design here takes into account the fact that only nonresponders, not everyone, were randomized to a level of the *meal* factor. 
 
 #### Distal
 ```
@@ -252,7 +250,7 @@ have a statistically significant effect in this hypothetical trial (p=.240),
 so it would probably not be considered worth the additional expense. The
 two factors did not significantly interact.
 
-The ``cluster size'' above is given as 2, which might seem confusing because the outcome is supposed to be person-level. This happens because the estimation is done using a weighting and replication method (W&R), which treats people who were not randomized to a level of the Stage II factor as if they were clusters of two people: one who was randomized to +1 and one to -1 on that factor. The true sample size without replicates is taken into account in the standard error. This is explained further [elsewhere](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3825557/).
+The ``cluster size'' above is given as 2, which might seem confusing because the outcome is supposed to be person-level. This happens because the estimation is done using a weighting and replication method (W&R), which treats people who were not randomized to a level of the Stage II factor as if they were clusters of two people: one who was randomized to +1 and one to -1 on that factor. The true sample size without replicates is taken into account in the standard error. This is explained further [in a 2012 *Psychological Methods* article](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3825557/).
 
 
 #### Proximal
@@ -286,7 +284,9 @@ Number of clusters:   400  Maximum cluster size: 168
 ```
 
 The prompts factor (*A*) again does not have a statistically significant main effect (p=.103). 
-It does have a significant and positive interaction with coaching, however (p=0.030).  Therefore, if coaching is being provided, then prompts may also be useful. 
+It does have a significant and positive interaction with coaching, however (p=0.030), on top of the already strong effect of coaching.  Therefore, if coaching is being provided, then prompts may also be useful. 
+
+Coaching also has a strongly significant average effect on the proximal outcome. However,  coaching is randomized at the participant level instead of every day separately, so we will pay more attention to  its distal effect, which was already seen to be statistically significant. That is because the proximal effect of coaching is not the ultimate question of the study; it is at most a hypothesized  mediator by which coaching contributes to the distal outcome, which represents the final goal. As before, we do not test the effect of any particular daily prompt on the distal outcome, because there are many days in the study and the effect of the prompt given on a single day would not be feasible to detect.
 
 
 ***
