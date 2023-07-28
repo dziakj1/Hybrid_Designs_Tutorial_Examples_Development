@@ -12,6 +12,8 @@ output:
 
 #### Each example is based on a hypothetical study to answer questions which inform the design of weight loss interventions integrating multiple components.  More details on the motivation and interpretation for each example is given in Nahum-Shani et al (2023).
 
+*** 
+
 # Hybrid Factorial-SMART
 
 In the example hybrid factorial-SMART, the hypothetical intervention being considered would begin by providing a mobile app (*App*) and/or weekly coaching (*Coaching*).  Participants who show early signs of nonresponse after 2 weeks would be offered meal replacement (*Meal*).  The research questions are 
@@ -84,6 +86,7 @@ Biological sex (coded +1 for female and -1 for male), and baseline BMI, also cen
 
 Note that, of course, this is simulated data from a hypothetical study, so it should not be considered for making real-world conclusions.  It is only provided as a template for planning and analyzing future real studies.  Also, note that this example does not contain information on costs, which would also be an issue in deploying the proposed intervention in the real world (especially because meal replacement can be expensive).  Cost-effectiveness would be a separate analysis.
 
+***
  
 # Hybrid Factorial-MRT
          
@@ -145,7 +148,7 @@ Multiple R-squared:  0.0837,	Adjusted R-squared:  0.0721
 F-statistic:  7.2 on 5 and 394 DF,  p-value: 1.82e-06
 ```
 
-
+The meal replacement factor (*Meal*) has a statistically significant effect on the distal outcome (p=.0077).  Its effect size is twice 0.33, or .66 kilograms.  If this is considered high enough to be worthwhile, it would support a decision to start an adaptive intervention with Meal.  The *Coaching* factor does not seem to have a statistically or practically significant effect, and there does not seem to be a significant interaction.
 
 #### Proximal:
 ```
@@ -177,6 +180,12 @@ Estimated Scale Parameters:
 Number of clusters:   400  Maximum cluster size: 84 
 ```
 
+In the output above, A represents the prompt factor.  It does not seem to have a statistically significant effect on the proximal outcome (p=.1073).  Perhaps participants are ignoring the prompt.  The coaching and meal factors do have an effect on the proximal outcome as well as the distal outcome; however, because they are long-term decisions, the distal outcome is probably more important to consider.  There may be a significant interaction between the prompt and the *Coaching* factor (p=.0346), in which the prompt is more effective if the participant has a coach. However, because the coaching factor doesn't seem to have an effect on the distal outcome, the interaction might not be enough to support including either the prompts or the coaching.
+
+We don't test the effect of an individual occasion-level prompt (e.g., on a particular day) on the distal outcome, because that would likely be too small to detect.  The hypothetical study isn't designed for comparing prompts versus no prompts on the distal outcome, because in this hypothetical design everyone got prompts about half the time; the main difference was which days.  So whether prompts are ever helpful in this intervention for this population is still unknown.  They do not at least seem to affect the proximal outcome very much. 
+
+
+***
 
 # Hybrid SMART-MRT
 
@@ -274,4 +283,6 @@ This information may be useful in helping researchers to conceptualize the kinds
 
 - [A more advanced example analysis](https://github.com/d3center-isr/hybrid-experimental-design) for a hybrid SMART-MRT in which only nonresponders received the micro-randomized treatments, analyzed using a robust method which allows time-varying covariates.
  
-- [Open-access preprint of the *Behavior Research Methods* article](https://arxiv.org/abs/2302.09046).
+- [Open-access preprint of the *Behavior Research Methods* article](https://arxiv.org/abs/2302.09046)
+ 
+- [A closely related article with more information](https://journals.sagepub.com/doi/pdf/10.1177/25152459221114279)
